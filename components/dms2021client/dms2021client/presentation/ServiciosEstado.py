@@ -3,9 +3,8 @@ import os
 from abc import ABC, abstractmethod
 
 
-class ServiciosEstado:
-
-    @abstractmethod
+class ServiciosEstado(ABC):
     @staticmethod
+    @abstractmethod
     def ejecutarPagina(session_id:str):
         pass

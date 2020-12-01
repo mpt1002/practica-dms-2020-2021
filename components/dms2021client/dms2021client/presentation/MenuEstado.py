@@ -8,7 +8,7 @@ class MenuEstado:
 
     @staticmethod
     def ejecutarPagina(session_id: str) -> int:
-        opcion = 0
+        opcion : int = 0
         while(opcion >= 0 and opcion < 6):
             print('MENU')
             print('\t1. Crear usuarios')
@@ -18,5 +18,5 @@ class MenuEstado:
             print('\t5. Obtener los valores de monitorizacion de cada sensor')
             print('\t6. Salir')
             print("\tIntroduce una opcion (1-6): ")
-            opcion = input()
+            opcion = int(input())
         return opcion

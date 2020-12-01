@@ -13,35 +13,35 @@ class ManejadorPagina:
         self.cfg: ClientConfiguration = ClientConfiguration()
         self.cfg.load_from_file(self.cfg.default_config_file())
         self.auth_service: AuthService = AuthService(self.cfg.get_auth_service_host(), self.cfg.get_auth_service_port())
-        self.session_id : str
+        self.session_id : str = ""
         self.login()
         opcion = MenuEstado.ejecutarPagina(self.session_id)
-        while opcion is not 6:
-            if opcion is 0:
+        while opcion != 6:
+            if opcion == 0:
                 MenuEstado.ejecutarPagina(self.session_id)
-            elif opcion is 1:
+            elif opcion == 1:
                 pass
-            elif opcion is 2:
+            elif opcion == 2:
                 pass
-            elif opcion is 3:
+            elif opcion == 3:
                 pass
-            elif opcion is 4:
+            elif opcion == 4:
                 pass
-            elif opcion is 5:
+            elif opcion == 5:
                 pass
         self.logout()
             
 
 
     def login(self):
-
+        
         while not self.auth_service.is_running():
             time.sleep(1)
         print("\nAuthentication service up!")
-
         
-        print("Press Ctrl+C to end this process.")
-        print("If run as a docker container, press Ctrl+P,Ctrl+Q to detach from the container.")
+        
+        print('Press Ctrl+C to end this process.')
+        print('If run as a docker container, press Ctrl+P,Ctrl+Q to detach from the container.')
         username: str = input('Username: ')
         password: str = getpass('Password: ')
         try:
@@ -64,3 +64,4 @@ class ManejadorPagina:
         except Exception as ex:
             print(ex)
 
+ManejadorPagina()
