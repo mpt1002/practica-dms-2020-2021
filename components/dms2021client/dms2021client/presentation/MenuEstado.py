@@ -1,20 +1,20 @@
 
-from ..presentation import ServiciosEstado, ManejadorPagina
+from ..presentation import ServiciosEstado
+from ..logic import ManejadorPagina
 
 class MenuEstado(ServiciosEstado):
 
-    # Referncia a la clase contexto
-    __manejador : ManejadorPagina
+    __session_id : str
 
     
-    def __init__(self, manejador: ManejadorPagina):
+    def __init__(self, session_id: str):
         print("ESTOY EN MENU ESTADO")
-        self.__manejador = manejador
+        self.__session_id = session_id
+        self.ejecutarPagina()
 
     #@staticmethod
     def ejecutarPagina(self) -> int:
         opcion : int = 0
-        self.__manejador.set_opcion(opcion)
         while(opcion >= 0 and opcion < 6):
             print('MENU')
             print('\t1. Crear usuarios')
@@ -25,8 +25,4 @@ class MenuEstado(ServiciosEstado):
             print('\t6. Salir')
             print("\tIntroduce una opcion (1-6): ")
             opcion = int(input())
-        self.__manejador.set_opcion(opcion)
         return opcion
-
-    def logout(self):
-        pass

@@ -5,7 +5,7 @@ from getpass import getpass
 from dms2021client.data.config import ClientConfiguration
 from dms2021client.data.rest import AuthService
 from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
-from ..presentation import ServiciosEstado, MenuEstado
+from ..presentation import ServiciosEstado, MenuEstado, ExitEstado
 
 class ManejadorPagina:
 
@@ -20,16 +20,16 @@ class ManejadorPagina:
         self.__cfg = ClientConfiguration()
         self.__cfg.load_from_file(self.__cfg.default_config_file())
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
-        #self.session_id : str = ""
         self.__session_id = self.login()
         print('HE VUELTO DEL LOGIN')
         # Ir al estado inicial
-        #self.__estado = MenuEstado(self)
-        '''
-        opcion = MenuEstado.ejecutarPagina(self.__session_id)
+        self.__estado = MenuEstado(self.__session_id)
+        
+        opcion = 0
         while opcion != 6:
+            opcion = self.__estado.ejecutarPagina()
             if opcion == 0:
-                MenuEstado.ejecutarPagina(self.__session_id)
+                self.__estado = MenuEstado(self.__session_id)
             elif opcion == 1:
                 pass
             elif opcion == 2:
@@ -40,8 +40,9 @@ class ManejadorPagina:
                 pass
             elif opcion == 5:
                 pass
-        self.logout()
-        '''
+            elif opcion == 6:
+                self.__estado = ExitEstado(self.__session_id, self.__auth_service)
+                                
     # Obtener el estado actual
     def get_Estado(self) -> ServiciosEstado:
         return self.__estado
@@ -91,5 +92,4 @@ class ManejadorPagina:
 
         return self.__session_id
 
-#ManejadorPagina()
 # Crear un metodo main para la ejecucion de todo con el switch
