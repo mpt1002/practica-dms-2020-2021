@@ -1,6 +1,5 @@
 
-from .ServiciosEstado import ServiciosEstado
-from ...bin.dms2021client import ManejadorPagina
+from ..presentation import ServiciosEstado, ManejadorPagina
 
 class MenuEstado(ServiciosEstado):
 
@@ -9,6 +8,7 @@ class MenuEstado(ServiciosEstado):
 
     
     def __init__(self, manejador: ManejadorPagina):
+        print("ESTOY EN MENU ESTADO")
         self.__manejador = manejador
 
     #@staticmethod

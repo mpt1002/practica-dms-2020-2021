@@ -1,6 +1,5 @@
 from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
-from .ServiciosEstado import ServiciosEstado
-from ...bin.dms2021client import ManejadorPagina
+from ..presentation import ServiciosEstado, ManejadorPagina
 
 class ExitEstado(ServiciosEstado):
 

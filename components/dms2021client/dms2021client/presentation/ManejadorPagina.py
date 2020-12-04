@@ -5,7 +5,7 @@ from getpass import getpass
 from dms2021client.data.config import ClientConfiguration
 from dms2021client.data.rest import AuthService
 from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
-from dms2021client.presentation import ServiciosEstado, MenuEstado
+from ..presentation import ServiciosEstado, MenuEstado
 
 class ManejadorPagina:
 
@@ -16,14 +16,15 @@ class ManejadorPagina:
     __auth_service: AuthService
 
     def __init__(self):
+        print("ESTOY EN MANEJADOR PAGINA")
         self.__cfg = ClientConfiguration()
         self.__cfg.load_from_file(self.__cfg.default_config_file())
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
         #self.session_id : str = ""
         self.__session_id = self.login()
-        
+        print('HE VUELTO DEL LOGIN')
         # Ir al estado inicial
-        self.__estado = MenuEstado(self)
+        #self.__estado = MenuEstado(self)
         '''
         opcion = MenuEstado.ejecutarPagina(self.__session_id)
         while opcion != 6:
@@ -70,7 +71,7 @@ class ManejadorPagina:
         return self.__auth_service
 
     def login(self) -> str:
-        
+        print('ESTOY EN LOGIN')
         while not self.__auth_service.is_running():
             time.sleep(1)
         print("\nAuthentication service up!")
@@ -90,5 +91,5 @@ class ManejadorPagina:
 
         return self.__session_id
 
-ManejadorPagina()
+#ManejadorPagina()
 # Crear un metodo main para la ejecucion de todo con el switch
