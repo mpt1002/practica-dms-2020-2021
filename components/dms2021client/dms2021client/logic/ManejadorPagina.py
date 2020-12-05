@@ -27,7 +27,6 @@ class ManejadorPagina:
         
         opcion = 0
         while True:
-            print('opcion: ' + str(opcion))
             opcion = self.__estado.ejecutarPagina()
             if opcion == 0:
                 self.__estado = MenuEstado(self.__session_id)

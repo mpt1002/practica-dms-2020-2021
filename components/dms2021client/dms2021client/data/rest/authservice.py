@@ -101,3 +101,74 @@ class AuthService():
             raise UnauthorizedError()
         if response.status == 500:
             raise HTTPException('Server error')
+
+    def hasRigth(self, session_id: str, right: str) -> bool:
+        connection: HTTPConnection = self.__get_connection()
+        direccion : str = '/users/' + str(session_id) + '/rights/' + str(right)
+
+        connection.request('GET', direccion)
+        response: HTTPResponse = connection.getresponse()
+        if response.status == 200:
+            return True
+        elif response.status == 404:
+            print('ERROR 404')
+            return False
+        else:
+            print('Error al comprobar si el usuario tiene permisos')
+            return False
+
+    def createUser(self, username : str, password : str):
+        form: str = urlencode({'username': username, 'password': password, 'session_id': username})
+        headers: dict = {
+            'Content-type': 'application/x-www-form-urlencoded'
+        }
+        connection: HTTPConnection = self.__get_connection()
+        direccion : str = '/users'
+
+        connection.request('POST', direccion, form, headers)
+        response: HTTPResponse = connection.getresponse()
+        if response.status == 200:
+            print('Usuario creado correctamente')
+        elif response.status == 400:
+            print('Los parametros pasados son invalidos')
+        elif response.status == 401:
+            print('No tiene permisos para crear usuarios')
+        elif response.status == 409:
+            print('El usuario que se intenta crear ya existe')
+
+    def giveRight(self, username : str, rigthName : str, session_id : str):
+        form: str = urlencode({'username': username, 'rigth_name': rigthName, 'session_id': session_id})
+        headers: dict = {
+            'Content-type': 'application/x-www-form-urlencoded'
+        }
+        connection: HTTPConnection = self.__get_connection()
+        direccion : str = '/users/' + str(username) + '/rights/' + str(rigthName)
+        connection.request('POST', direccion, form, headers)
+        response: HTTPResponse = connection.getresponse()
+        if response.status == 200:
+            print('Permiso otorgado satisfactoriamente')
+        elif response.status == 401:
+            print('No tienes los permisos necesarios para otorgar permisos')
+        elif response.status == 404:
+            print('Argumentos pasados incorrectos')
+        else:
+            print('Error inesperado ocurrido')
+
+    def revokeRight(self, username : str, rigthName : str, session_id : str):
+        form: str = urlencode({'username': username, 'rigth_name': rigthName, 'session_id': session_id})
+        headers: dict = {
+            'Content-type': 'application/x-www-form-urlencoded'
+        }
+        connection: HTTPConnection = self.__get_connection()
+        direccion : str = '/users/' + str(username) + '/rights/' + str(rigthName)
+        connection.request('DELETE', direccion, form, headers)
+        response: HTTPResponse = connection.getresponse()
+        if response.status == 200:
+            print('Permiso otorgado satisfactoriamente')
+        elif response.status == 401:
+            print('No tienes los permisos necesarios para otorgar permisos')
+        elif response.status == 404:
+            print('Argumentos pasados incorrectos')
+        else:
+            print('Error inesperado ocurrido')
+

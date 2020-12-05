@@ -11,11 +11,12 @@ class CrearUsuariosEstado(ServiciosEstado):
         self.__auth_service = auth_service
 
     def ejecutarPagina(self) -> int:
-        '''
-        Falta comprobar si el usuario tiene los permisos de creacion
-        '''
-        print('Creación de Usuarios')
-        newSession = input('\tNombre de la nueva cuenta:\n')
-        newPassword = input('\tContraseña de la nueva cuenta:\n')
-        print('FALTA CODIGO')
+        #Comprobar si el usuario tiene los permisos de creacion
+        if self.__auth_service.hasRigth(self.__session_id, 'AdminUsers'):
+            print('Creación de Usuarios')
+            newSession: str = input('\tNombre de la nueva cuenta:\n')
+            newPassword: str = input('\tContraseña de la nueva cuenta:\n')
+            self.__auth_service.createUser(newSession, newPassword)
+        else:
+            print('No tienes los permisos necesarios para crear usuarios')
         return 0
