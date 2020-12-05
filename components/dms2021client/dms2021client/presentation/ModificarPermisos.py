@@ -1,0 +1,4 @@
+
+
+class ModificarPermisosEstado():
+    pass

@@ -5,7 +5,7 @@ from getpass import getpass
 from dms2021client.data.config import ClientConfiguration
 from dms2021client.data.rest import AuthService
 from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
-from ..presentation import ServiciosEstado, MenuEstado, ExitEstado
+from ..presentation import ServiciosEstado, MenuEstado, ExitEstado, CrearUsuariosEstado, ModificarPermisosEstado, GestionPermisosEstado, AjusteSensoresEstado, MonitorizarSensoresEstado
 
 class ManejadorPagina:
 
@@ -16,7 +16,7 @@ class ManejadorPagina:
     __auth_service: AuthService
 
     def __init__(self):
-        print("ESTOY EN MANEJADOR PAGINA")
+        print('ESTOY EN MANEJADOR PAGINA')
         self.__cfg = ClientConfiguration()
         self.__cfg.load_from_file(self.__cfg.default_config_file())
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
@@ -26,22 +26,26 @@ class ManejadorPagina:
         self.__estado = MenuEstado(self.__session_id)
         
         opcion = 0
-        while opcion != 6:
+        while True:
+            print('opcion: ' + str(opcion))
             opcion = self.__estado.ejecutarPagina()
             if opcion == 0:
                 self.__estado = MenuEstado(self.__session_id)
             elif opcion == 1:
-                pass
+                self.__estado = CrearUsuariosEstado(self.__session_id, self.__auth_service)
             elif opcion == 2:
-                pass
+                self.__estado = ModificarPermisosEstado(self.__session_id, self.__auth_service)
             elif opcion == 3:
-                pass
+                self.__estado = GestionPermisosEstado(self.__session_id, self.__auth_service)
             elif opcion == 4:
-                pass
+                self.__estado = AjusteSensoresEstado(self.__session_id, self.__auth_service)
             elif opcion == 5:
-                pass
+                self.__estado = MonitorizarSensoresEstado()
             elif opcion == 6:
                 self.__estado = ExitEstado(self.__session_id, self.__auth_service)
+            elif opcion == 7:
+                #La opcion 7 solo saltara si se ha hecho el correcto logout
+                break
                                 
     # Obtener el estado actual
     def get_Estado(self) -> ServiciosEstado:
@@ -75,7 +79,7 @@ class ManejadorPagina:
         print('ESTOY EN LOGIN')
         while not self.__auth_service.is_running():
             time.sleep(1)
-        print("\nAuthentication service up!")
+        print('\nAuthentication service up!')
         
         
         print('Press Ctrl+C to end this process.')
