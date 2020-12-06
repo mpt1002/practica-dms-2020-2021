@@ -12,6 +12,7 @@ class ManejadorPagina:
     __estado : ServiciosEstado
     __opcion : int
     __session_id: str
+    __username : str
     __cfg: ClientConfiguration
     __auth_service: AuthService
 
@@ -20,7 +21,7 @@ class ManejadorPagina:
         self.__cfg = ClientConfiguration()
         self.__cfg.load_from_file(self.__cfg.default_config_file())
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
-        self.__session_id = self.login()
+        self.__session_id, self.__username = self.login()
         print('HE VUELTO DEL LOGIN')
         # Ir al estado inicial
         self.__estado = MenuEstado(self.__session_id)
@@ -31,7 +32,7 @@ class ManejadorPagina:
             if opcion == 0:
                 self.__estado = MenuEstado(self.__session_id)
             elif opcion == 1:
-                self.__estado = CrearUsuariosEstado(self.__session_id, self.__auth_service)
+                self.__estado = CrearUsuariosEstado(self.__session_id, self.__username, self.__auth_service)
             elif opcion == 2:
                 self.__estado = ModificarPermisosEstado(self.__session_id, self.__auth_service)
             elif opcion == 3:
@@ -87,12 +88,13 @@ class ManejadorPagina:
         password: str = getpass('Password: ')
         try:
             self.__session_id = self.__auth_service.login(username, password)
+            self.__username = username
             print('Logged in successfully as ' + username + ' . Session id: ' + self.__session_id)
         except InvalidCredentialsError:
             print('Wrong username and/or password. Try again.')
         except Exception as ex:
             print(ex)
 
-        return self.__session_id
+        return self.__session_id, self.__username
 
 # Crear un metodo main para la ejecucion de todo con el switch
