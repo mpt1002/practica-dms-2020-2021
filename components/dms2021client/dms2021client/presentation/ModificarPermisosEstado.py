@@ -3,15 +3,18 @@ from dms2021client.data.rest import AuthService
 
 class ModificarPermisosEstado(ServiciosEstado):
     __session_id : str
+    __username : str
     __auth_service : AuthService
 
-    def __init__(self, session_id : str, auth_service: AuthService):
+
+    def __init__(self, session_id : str, username: str, auth_service: AuthService):
         self.__session_id = session_id
+        self.__username = username
         self.__auth_service = auth_service
 
     def ejecutarPagina(self) -> int:
         #Comprobar si el usuario tiene los permisos de modificacion
-        if self.__auth_service.hasRigth(self.__session_id, 'AdminRights'):
+        if self.__auth_service.hasRigth(self.__username , 'AdminRights'):
             print('Modificación de permisos')
             print('¿A què usuario desea modificarle los permisos?')
             user : str = input('Introduzca el nombre del usuario:\n')
