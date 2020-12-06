@@ -12,3 +12,5 @@ rm -R "${TEMP_DIR}"
 
 # Create admin:admin user
 dms2021auth-create-admin
+# Create client: cliente user
+dms2021auth-create-regular-user

@@ -1,5 +1,6 @@
 from ..presentation import ServiciosEstado
 from dms2021client.data.rest import AuthService
+from dms2021core.data import UserRightName
 
 class CrearUsuariosEstado(ServiciosEstado):
     

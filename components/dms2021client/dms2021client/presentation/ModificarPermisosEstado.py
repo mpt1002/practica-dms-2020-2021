@@ -19,10 +19,13 @@ class ModificarPermisosEstado(ServiciosEstado):
             print('¿A què usuario desea modificarle los permisos?')
             user : str = input('Introduzca el nombre del usuario:\n')
             decision = 0
-            while not (decision ==1 or decision == 2):
+            while True:
                 print('1. Añadir permisos')
                 print('2. Revocar permisos')
                 decision = input()
+                if decision == '1' or decision == '2':
+                    print('ENTRO')
+                    break
             if decision == 1:
                 self.annadirPermiso(user)
             else:

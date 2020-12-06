@@ -135,6 +135,9 @@ class AuthService():
             print('No tiene permisos para crear usuarios')
         elif response.status == 409:
             print('El usuario que se intenta crear ya existe')
+        else:
+            print('Error inesperado ha ocurrido')
+            print('ERROR ' + str(response.status))
 
     def giveRight(self, username : str, rigthName : str, session_id : str):
         form: str = urlencode({'username': username, 'rigth_name': rigthName, 'session_id': session_id})
