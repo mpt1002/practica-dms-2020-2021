@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
 
 from flask import Flask, request
+from dms2021sensor.data.SensorFile import SensorFile
+from dms2021core.data.rest import RestResponse
+from dms2021sensor.logic.rest import restSensor
 
 app = Flask(__name__)
+restSensores = restSensor()
+
+@app.route('/', methods=['GET'])
+def is_running():
+    return ('', 200, {'Content-Type': 'text/plain'})
+
+@app.route('/sensor<string:sensorname>/value', methods=['GET'])
+def get_valor_sensor(sensorname : str):
+    return restSensores.obtenerRespuestaSensor(sensorname)

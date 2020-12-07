@@ -1,2 +1,1 @@
-""" Sensor logic classes
-"""
+from rest.restSensor import RestSensor
