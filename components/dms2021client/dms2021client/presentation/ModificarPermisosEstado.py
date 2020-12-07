@@ -22,13 +22,13 @@ class ModificarPermisosEstado(ServiciosEstado):
             while True:
                 print('1. Añadir permisos')
                 print('2. Revocar permisos')
-                decision = input()
-                if decision == '1' or decision == '2':
+                decision = int(input())
+                if decision == 1 or decision == 2:
                     print('ENTRO')
                     break
             if decision == 1:
                 self.annadirPermiso(user)
-            else:
+            elif decision == 2:
                 self.revocarPermiso(user)
 
         else:
@@ -41,6 +41,6 @@ class ModificarPermisosEstado(ServiciosEstado):
         self.__auth_service.giveRight(user, permiso, self.__session_id)
 
     def revocarPermiso(self, user: str):
-        print('¿Qué permiso desea añadir?')
+        print('¿Qué permiso desea revocar?')
         permiso: str = input()
         self.__auth_service.revokeRight(user, permiso, self.__session_id)

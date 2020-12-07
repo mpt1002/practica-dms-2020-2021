@@ -167,9 +167,9 @@ class AuthService():
         connection.request('DELETE', direccion, form, headers)
         response: HTTPResponse = connection.getresponse()
         if response.status == 200:
-            print('Permiso otorgado satisfactoriamente')
+            print('Permiso revocados satisfactoriamente')
         elif response.status == 401:
-            print('No tienes los permisos necesarios para otorgar permisos')
+            print('No tienes los permisos necesarios para revocar permisos')
         elif response.status == 404:
             print('Argumentos pasados incorrectos')
         else:

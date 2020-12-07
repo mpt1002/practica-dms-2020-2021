@@ -1,25 +1,5 @@
 #!/usr/bin/env python3
-from abc import ABC, abstractmethod
-import os
-'''
-import time
 
-print("This file is a stub. Replace this behaviour with the actual service code.")
+from flask import Flask, request
 
-while True:
-    time.sleep(1)
-'''
-
-class Sensor(ABC):
-    @abstractmethod
-    def monitorizar(self):
-        pass
-        
-class SensorFile (Sensor):
-    file:str
-    def __init__(self, file):
-        self.file = '../dms2021sensor/data/'+file
-
-    def monitorizar(self):
-        devuelto = os.system('find '+ self.file)
-        return devuelto == self.file
+app = Flask(__name__)
