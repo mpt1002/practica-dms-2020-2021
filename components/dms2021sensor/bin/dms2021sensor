@@ -1,17 +1,42 @@
 #!/usr/bin/env python3
 
+import logging
 from flask import Flask, request
-from dms2021sensor.data.SensorFile import SensorFile
+from flask.logging import default_handler
+from dms2021sensor.data.config import SensorConfiguration
+#from dms2021sensor.data import SensorFile
 from dms2021core.data.rest import RestResponse
-from dms2021sensor.logic.rest import restSensor
+from dms2021sensor.logic.rest.restSensor import RestSensor
 
 app = Flask(__name__)
-restSensores = restSensor()
+root_logger = logging.getLogger()
+root_logger.addHandler(default_handler)
+
+cfg: SensorConfiguration = SensorConfiguration()
+cfg.load_from_file(cfg.default_config_file())
+restSensores = RestSensor()
 
 @app.route('/', methods=['GET'])
 def is_running():
     return ('', 200, {'Content-Type': 'text/plain'})
 
-@app.route('/sensor<string:sensorname>/value', methods=['GET'])
+@app.route('/sensor/<string:sensorname>/value', methods=['GET'])
 def get_valor_sensor(sensorname : str):
-    return restSensores.obtenerRespuestaSensor(sensorname)
+    response: RestResponse = restSensores.obtenerRespuestaSensor(sensorname)
+    return  (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
+
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    if cfg.get_debug_flag():
+        app.logger.error(str(type(e)))
+        app.logger.error(e)
+    return ('', 500)
+
+
+if __name__ == '__main__':
+    app.run(
+        host=cfg.get_service_host(),
+        port=cfg.get_service_port(),
+        debug=cfg.get_debug_flag()
+    )
