@@ -1,1 +1,2 @@
-from rest.restSensor import RestSensor
+
+from .rest.restSensor import RestSensor
