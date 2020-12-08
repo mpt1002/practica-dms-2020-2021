@@ -17,7 +17,7 @@ services:
     build:
       context: ../images/service
     image: dms2021-service
-    container_name: dms2021sensor1
+    container_name: dms2021sensor # Modificado dms2021sensor1
     volumes:
       - ../../components/dms2021core:/tmp/deps/src/core:ro
       - ../../components/dms2021sensor:/tmp/src:ro
