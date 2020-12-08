@@ -1,15 +1,18 @@
-from Sensor import Sensor
+from .Sensor import Sensor
 import os
 
 class SensorFile (Sensor):
     __file:str
 
     def __init__(self, file:str):
-        self.__file = '../dms2021sensor/data/'+file
+        self.__file = file
 
     def monitorizar(self):
-        devuelto = os.system('find '+ self.file)
-        if devuelto == self.file:
-            return 'Fichreo en el sistema'
+        #devuelto : str = os.system("find "+ self.__file)
+        pwd : str = os.system("pwd")
+        print(pwd)
+        devuelto : str = os.system("find . -name "+self.__file)
+        if devuelto != "":
+            return '\t--> Fichero '+str(self.__file)+' se ha encontrado.\n'
         else:
-            return 'El fichero buscado no esta en el sistema'
+            return '\t--> Fichero '+str(self.__file)+' NO se ha encontrado.\n'
