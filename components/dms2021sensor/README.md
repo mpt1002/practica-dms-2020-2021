@@ -35,4 +35,16 @@ Just run `dms2021sensor` as any other program.
 
 This service exposes a REST API so other services/applications can interact with it.
 
-_(TO DO)_
+- `/` [`GET`]
+
+  Status verification.
+  - Returns:
+    - `200 OK` if the service is running.
+    
+- `/sensor/<sensorname>/value` [`GET`]
+  Gets the value monitorized by the specified sensor
+  - Parameters: 
+    - `sensorname` [path] (`str`): The sensor name
+  -Returns:
+    - `200 sensorvalue` if the value of the sensor was sent succesfuly
+    - `404 Not foud` if the sensor doesn't existe
