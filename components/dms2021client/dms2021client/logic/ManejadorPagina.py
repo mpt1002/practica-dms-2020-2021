@@ -3,7 +3,7 @@
 import time
 from getpass import getpass
 from dms2021client.data.config import ClientConfiguration
-from dms2021client.data.rest import AuthService
+from dms2021client.data.rest import AuthService, Sensorservice
 from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
 from ..presentation import ServiciosEstado, MenuEstado, ExitEstado, CrearUsuariosEstado, ModificarPermisosEstado, GestionPermisosEstado, AjusteSensoresEstado, MonitorizarSensoresEstado
 
@@ -15,12 +15,14 @@ class ManejadorPagina:
     __username : str
     __cfg: ClientConfiguration
     __auth_service: AuthService
+    __sensor_service : Sensorservice
 
     def __init__(self):
         print('ESTOY EN MANEJADOR PAGINA')
         self.__cfg = ClientConfiguration()
         self.__cfg.load_from_file(self.__cfg.default_config_file())
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
+        #self.__sensor_service = Sensorservice(self.__cfg.get_sensor_service_host(), self.__cfg.get_sensor_service_port())
         self.__session_id, self.__username = self.login()
         print('HE VUELTO DEL LOGIN')
         # Ir al estado inicial

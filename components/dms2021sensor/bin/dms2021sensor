@@ -20,8 +20,9 @@ restSensores = RestSensor()
 def is_running():
     return ('', 200, {'Content-Type': 'text/plain'})
 
-@app.route('/sensor/<string:sensorname>/value', methods=['GET'])
-def get_valor_sensor(sensorname : str):
+@app.route('/sensors', methods=['POST'])
+def get_valor_sensor():
+    sensorname: str = request.form['sensorname']
     response: RestResponse = restSensores.obtenerRespuestaSensor(sensorname)
     return  (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
 

@@ -28,13 +28,18 @@ class SensorService():
             return False
 
     def get_sensor_value(self, sensorName : str):
+        form : str = urlencode({'sensorname': sensorName})
+        headers: dict = {
+            'Content-type': 'application/x-www-form-urlencoded'
+        }
         connection: HTTPConnection = self.__get_connection()
-        direccion = '/sensor/' + str(sensorName) + '/value'
-        connection.request('GET', '/')
+        direccion = '/sensors'
+        connection.request('POST', direccion, form, headers)
         response: HTTPResponse = connection.getresponse()
         if response.status == 200:
-            #Falta devolver el valor del sensor
-            pass
+            response_data_json = response.read()
+            response_data = json.loads(response_data_json)
+            return response['sensorname']
         elif response.status == 404:
             print('Ese sensor no existe')
         else:
