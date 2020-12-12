@@ -41,10 +41,16 @@ This service exposes a REST API so other services/applications can interact with
   - Returns:
     - `200 OK` if the service is running.
     
-- `/sensor/<sensorname>/value` [`GET`]
+- `/sensors` [`POST`]
   Gets the value monitorized by the specified sensor
   - Parameters: 
     - `sensorname` [path] (`str`): The sensor name
   -Returns:
     - `200 sensorvalue` if the value of the sensor was sent succesfuly
     - `404 Not foud` if the sensor doesn't existe
+    
+-`/sensors/values` [`GET`]
+  Gets all the values monitorized by all sensors
+  -Returns:
+    - `200 values of sensors` if the values of every sensor was sent succesfuly
+    -`404 Not found`if the sensor service has no sensors
