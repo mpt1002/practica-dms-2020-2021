@@ -2,4 +2,4 @@
 """
 
 from .authservice import AuthService
-from .sensorService import Sensorservice
+from .sensorService import SensorService
