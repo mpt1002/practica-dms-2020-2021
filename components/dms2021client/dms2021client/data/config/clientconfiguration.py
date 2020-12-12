@@ -75,6 +75,49 @@ class ClientConfiguration(Configuration):
         auth_service_value: dict = self.__get_auth_service_value()
         return int(str(auth_service_value['port']))
 
+    # Sensor
+    
+    def __get_sensor_service_value(self) -> dict:
+        """ Gets the value of the sensor_service configuration dictionary.
+        ---
+        Returns:
+            A dictionary with the authentication service configured parameters.
+        """
+        sensor_service_value: ConfigurationValueType = self.get_value(
+            'sensor1'
+        )
+        if not isinstance(sensor_service_value, dict):
+            raise TypeError(
+                'Configuration parameter sensor_service is expected to be a dictionary. Received: '
+                + str(type(sensor_service_value))
+            )
+        return sensor_service_value
+
+    def get_sensor_service_host(self) -> str:
+        """ Gets the sensor service host configuration value.
+        ---
+        Returns:
+            A string with the value of sensor host.
+        Throws:
+            - TypeError: if the sensor parameter is not a dictionary.
+        """
+
+        sensor_service_value: dict = self.__get_sensor_service_value()
+        return str(sensor_service_value['host'])
+
+    def get_sensor_service_port(self) -> int:
+        """ Gets the sensor service port configuration value.
+        ---
+        Returns:
+            An integer with the value of sensor port.
+        Throws:
+            - TypeError: if the sensor parameter is not a dictionary.
+        """
+
+        sensor_service_value: dict = self.__get_sensor_service_value()
+        return int(str(sensor_service_value['port']))
+
+
     def get_debug_flag(self) -> bool:
         """ Gets whether the debug flag is set or not.
         ---
