@@ -26,6 +26,10 @@ def get_valor_sensor():
     response: RestResponse = restSensores.obtenerRespuestaSensor(sensorname)
     return  (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
 
+@app.route('/sensors/values', methods = ['GET'])
+def get_all_values():
+    response: RestResponse = restSensores.obtenerValoresTodosSensores()
+    return (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
 
 @app.errorhandler(Exception)
 def handle_exception(e):

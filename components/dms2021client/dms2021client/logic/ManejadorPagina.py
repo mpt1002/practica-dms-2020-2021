@@ -22,9 +22,9 @@ class ManejadorPagina:
         self.__cfg = ClientConfiguration()
         self.__cfg.load_from_file(self.__cfg.default_config_file())
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
-        self.__sensor_service = SensorService(self.__cfg.get_sensor_service_host(), self.__cfg.get_sensor_service_port())
         self.__session_id, self.__username = self.login()
         print('HE VUELTO DEL LOGIN')
+        self.__sensor_service = self.__get_sensor_service()
         # Ir al estado inicial
         self.__estado = MenuEstado(self.__session_id)
         
@@ -42,8 +42,7 @@ class ManejadorPagina:
             elif opcion == 4:
                 self.__estado = AjusteSensoresEstado(self.__session_id, self.__auth_service)
             elif opcion == 5:
-                #self.__estado = MonitorizarSensoresEstado()
-                pass
+                self.__estado = MonitorizarSensoresEstado(self.__session_id, self.__sensor_service)
             elif opcion == 6:
                 self.__estado = ExitEstado(self.__session_id, self.__auth_service)
             elif opcion == 7:
@@ -100,4 +99,14 @@ class ManejadorPagina:
 
         return self.__session_id, self.__username
 
-# Crear un metodo main para la ejecucion de todo con el switch
+    def __get_sensor_service(self) -> SensorService:
+        opcion:int = 0
+        while True:
+            print('¿Qué sensor desea monitorizar?')
+            print('\t1. Sensor 1')
+            print('\t2. Sensor 2')
+            opcion = int(input('Elija un sensor'))
+            if opcion == 1:
+                return SensorService(self.__cfg.get_sensor1_service_host(), self.__cfg.get_sensor1_service_port())
+            elif opcion == 2:
+                return SensorService(self.__cfg.get_sensor2_service_host(), self.__cfg.get_sensor2_service_port())

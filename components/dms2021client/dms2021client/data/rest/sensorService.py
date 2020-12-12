@@ -44,3 +44,15 @@ class SensorService():
             print('Ese sensor no existe')
         else:
             print('Error inesperado ha ocurrido')
+
+    def get_all_values(self):
+        connection: HTTPConnection = self.__get_connection()
+        direccion = '/sensors/values'
+        connection.request('GET', direccion)
+        response: HTTPResponse = connection.getresponse()
+        if response.status == 200:
+            return response.read()
+        elif response.status == 400:
+            return "El servicio no tiene sensores"
+        else:
+            return "Error inesperado ocurrido: " + str(response.status)
