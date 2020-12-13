@@ -38,7 +38,7 @@ class ManejadorPagina:
             elif opcion == 2:
                 self.__estado = ModificarPermisosEstado(self.__session_id, self.__username, self.__auth_service)
             elif opcion == 3:
-                self.__estado = GestionPermisosEstado(self.__session_id, self.__auth_service)
+                self.__estado = GestionPermisosEstado(self.__session_id, self.__username, self.__auth_service)
             elif opcion == 4:
                 self.__estado = AjusteSensoresEstado(self.__session_id, self.__auth_service)
             elif opcion == 5:
