@@ -24,7 +24,7 @@ class ManejadorPagina:
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
         self.__session_id, self.__username = self.login()
         print('HE VUELTO DEL LOGIN')
-        self.__sensor_service = self.__get_sensor_service()
+        
         # Ir al estado inicial
         self.__estado = MenuEstado(self.__session_id)
         
@@ -42,6 +42,7 @@ class ManejadorPagina:
             elif opcion == 4:
                 self.__estado = AjusteSensoresEstado(self.__session_id, self.__auth_service)
             elif opcion == 5:
+                self.__sensor_service = self.__get_sensor_service()
                 self.__estado = MonitorizarSensoresEstado(self.__session_id, self.__sensor_service)
             elif opcion == 6:
                 self.__estado = ExitEstado(self.__session_id, self.__auth_service)
