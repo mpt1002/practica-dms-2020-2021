@@ -15,3 +15,4 @@ user_right_manager: UserRightManager = UserRightManager(cfg, db, user_session_ma
 user_manager.create_user('admin', 'admin', '', user_right_validator, superuser=True)
 user_right_manager.grant('admin', UserRightName.AdminUsers, '', user_right_validator, superuser=True)
 user_right_manager.grant('admin', UserRightName.AdminRights, '', user_right_validator, superuser=True)
+user_right_manager.grant('admin', UserRightName.AdminSensors, '', user_right_validator, superuser=True)
