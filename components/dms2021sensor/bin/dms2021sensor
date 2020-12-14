@@ -4,7 +4,6 @@ import logging
 from flask import Flask, request
 from flask.logging import default_handler
 from dms2021sensor.data.config import SensorConfiguration
-#from dms2021sensor.data import SensorFile
 from dms2021core.data.rest import RestResponse
 from dms2021sensor.logic.rest.restSensor import RestSensor
 
@@ -25,6 +24,11 @@ def get_valor_sensor():
     sensorname: str = request.form['sensorname']
     response: RestResponse = restSensores.obtenerRespuestaSensor(sensorname)
     return  (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
+
+@app.route('/sensors', methods = ['GET'])
+def get_all_sensors():
+    response: RestResponse = restSensores.obtenerRespuestaSensor(sensorname)
+    return (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
 
 @app.route('/sensors/values', methods = ['GET'])
 def get_all_values():

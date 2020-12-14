@@ -29,6 +29,13 @@ class RestSensor():
             devuelto = devuelto + "\t" + str(self.__sensores[sensor].monitorizar()) + "\n"
 
         if devuelto == "Sensores:\n":
-            return RestResponse("No se han encontrado sensores", 404, 'text/plain')
+            return RestResponse('No se han encontrado sensores', 404, 'text/plain')
         return RestResponse(devuelto, 200, 'text/plain')
+
+    def obtenerTodosSensores(self) -> RestResponse:
+        devuelto: str = self.__sensores.keys()
+        if devuelto == '[]':
+            return RestResponse('No sensors', 404, 'text/plain')
+        else:
+            return RestResponse(devuelto, 200, 'text/plain')
 
