@@ -20,7 +20,7 @@ class CrearUsuariosEstado(ServiciosEstado):
             print('Creación de Usuarios')
             newSession: str = input('\tNombre del nuevo usuario: ')
             newPassword: str = input('\tContraseña para el nuevo usuario: ')
-            self.__auth_service.createUser(newSession, newPassword)
+            self.__auth_service.createUser(newSession, newPassword, self.__session_id)
         else:
             print('No tienes los permisos necesarios para crear usuarios')
         return 0

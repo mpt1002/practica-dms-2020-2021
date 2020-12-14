@@ -117,8 +117,8 @@ class AuthService():
             print('Error al comprobar si el usuario tiene permisos')
             return False
 
-    def createUser(self, username : str, password : str):
-        form: str = urlencode({'username': username, 'password': password, 'session_id': username})
+    def createUser(self, username : str, password : str, session_id:str):
+        form: str = urlencode({'username': username, 'password': password, 'session_id': session_id})
         headers: dict = {
             'Content-type': 'application/x-www-form-urlencoded'
         }
