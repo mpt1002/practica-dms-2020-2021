@@ -5,7 +5,7 @@ from getpass import getpass
 from dms2021client.data.config import ClientConfiguration
 from dms2021client.data.rest import AuthService, SensorService
 from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
-from ..presentation import ServiciosEstado, MenuEstado, ExitEstado, CrearUsuariosEstado, ModificarPermisosEstado, GestionPermisosEstado, AjusteSensoresEstado, MonitorizarSensoresEstado
+from ..presentation import ServiciosEstado, MenuEstado, ExitEstado, CrearUsuariosEstado, ModificarPermisosEstado, GestionarSensoresEstado, AjusteSensoresEstado, MonitorizarSensoresEstado
 
 class ManejadorPagina:
 
@@ -38,12 +38,14 @@ class ManejadorPagina:
             elif opcion == 2:
                 self.__estado = ModificarPermisosEstado(self.__session_id, self.__username, self.__auth_service)
             elif opcion == 3:
-                self.__estado = GestionPermisosEstado(self.__session_id, self.__username, self.__auth_service)
+                self.__sensor_service = self.__get_sensor_service()
+                self.__estado = GestionarSensoresEstado(self.__session_id, self.__username, self.__auth_service, self.__sensor_service)
             elif opcion == 4:
-                self.__estado = AjusteSensoresEstado(self.__session_id, self.__username, self.__auth_service)
+                self.__sensor_service = self.__get_sensor_service()
+                self.__estado = AjusteSensoresEstado(self.__session_id, self.__username, self.__auth_service, self.__sensor_service)
             elif opcion == 5:
                 self.__sensor_service = self.__get_sensor_service()
-                self.__estado = MonitorizarSensoresEstado(self.__session_id, self.__sensor_service)
+                self.__estado = MonitorizarSensoresEstado(self.__username, self.__auth_service, self.__sensor_service)
             elif opcion == 6:
                 self.__estado = ExitEstado(self.__session_id, self.__auth_service)
             elif opcion == 7:

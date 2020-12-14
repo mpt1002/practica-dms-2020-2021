@@ -55,7 +55,7 @@ class SensorService():
             connection.request('GET', direccion)
             response: HTTPResponse = connection.getresponse()
             if response.status == 200:
-                return response.read()
+                return str(response.read(), 'utf8')
             elif response.status == 400:
                 return "El servicio no tiene sensores"
             else:
