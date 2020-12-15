@@ -27,7 +27,7 @@ def get_valor_sensor():
 
 @app.route('/sensors', methods = ['GET'])
 def get_all_sensors():
-    response: RestResponse = restSensores.obtenerRespuestaSensor(sensorname)
+    response: RestResponse = restSensores.obtenerValoresTodosSensores()
     return (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
 
 @app.route('/sensors/values', methods = ['GET'])
