@@ -55,6 +55,11 @@ This service exposes a REST API so other services/applications can interact with
     - `200 sensorsname` if the name of every sensor was sent succesfuly
     - `404 No sensors` if the service has no sensors
     
+- `/sensors/types` [`GET`]
+  Gets all the posible types of monitorized sensors
+  -Returns:
+    - `200 sensortypes` if the possible types of sensors was sent succesfuly
+    
 -`/sensors/values` [`GET`]
   Gets all the values monitorized by all sensors
   -Returns:

@@ -16,9 +16,9 @@ class MonitorizarSensoresEstado(ServiciosEstado):
             if self.__sensor_service.is_running():
                 devuelto : str = "Sensores:\n"
                 response_data = self.__sensor_service.get_all_values()
-                for s in response_data:
-                    devuelto = devuelto + '\t'+str(s) + ":\n"
-                    devuelto = devuelto + "\t" + str(response_data[s]) + "\n"
+                for sensor in response_data:
+                    devuelto = devuelto + '\t'+str(sensor) + ":\n"
+                    devuelto = devuelto + "\t" + str(response_data[sensor]) + "\n"
                 print(devuelto)
             else:
                 print("ERROR: No se ha podido establecer contacto con el servicio sensor")

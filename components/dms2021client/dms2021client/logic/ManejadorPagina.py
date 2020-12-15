@@ -107,7 +107,7 @@ class ManejadorPagina:
     def __get_sensor_service(self) -> SensorService:
         opcion:int = 0
         while True:
-            print('¿Qué sensor desea monitorizar?')
+            print('¿Qué servicio sensor desea monitorizar?')
             print('\t1. Sensor 1')
             print('\t2. Sensor 2')
             opcion = int(input('Elija un sensor'))

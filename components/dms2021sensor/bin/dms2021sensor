@@ -13,7 +13,7 @@ root_logger.addHandler(default_handler)
 
 cfg: SensorConfiguration = SensorConfiguration()
 cfg.load_from_file(cfg.default_config_file())
-restSensores = RestSensor()
+restSensores = RestSensor({'sensorFile': 1})
 
 @app.route('/', methods=['GET'])
 def is_running():
@@ -30,9 +30,14 @@ def get_all_sensors():
     response: RestResponse = restSensores.obtenerValoresTodosSensores()
     return (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
 
+@app.route('/sensors/types', methods = ['GET'])
+def get_possible_types():
+    response : RestResponse = restSensores.get_posibles_tipos()
+    return (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
+
 @app.route('/sensors/values', methods = ['GET'])
 def get_all_values():
-    response: RestResponse = restSensores.obtenerValoresTodosSensores()
+    response : RestResponse  = restSensores.obtenerValoresTodosSensores()
     return (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
 
 @app.errorhandler(Exception)

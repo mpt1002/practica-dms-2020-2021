@@ -28,39 +28,48 @@ class SensorService():
             return False
 
     def get_sensor_value(self, sensorName : str):
-        if self.__host == '172.10.1.21': # Diferenciar sensores por sus hosts
-            form : str = urlencode({'sensorname': sensorName})
-            headers: dict = {
-                'Content-type': 'application/x-www-form-urlencoded'
-            }
-            connection: HTTPConnection = self.__get_connection()
-            direccion = '/sensors'
-            connection.request('POST', direccion, form, headers)
-            response: HTTPResponse = connection.getresponse()
-            if response.status == 200:
-                response_data_json = response.read()
-                response_data = json.loads(response_data_json)
-                return response['sensorname']
-            elif response.status == 404:
-                print('Ese sensor no existe')
-            else:
-                print('Error inesperado ha ocurrido')
-        elif self.__host == '172.10.1.22':
-            return '- Sensor no disponible'
+        form : str = urlencode({'sensorname': sensorName})
+        headers: dict = {
+            'Content-type': 'application/x-www-form-urlencoded'
+        }
+        connection: HTTPConnection = self.__get_connection()
+        direccion = '/sensors'
+        connection.request('POST', direccion, form, headers)
+        response: HTTPResponse = connection.getresponse()
+        if response.status == 200:
+            response_data_json = response.read()
+            response_data = json.loads(response_data_json)
+            return response_data[sensorName]
+        elif response.status == 404:
+            print('Ese sensor no existe')
+        else:
+            print('Error inesperado ha ocurrido')
 
-    def get_all_values(self):
-        if self.__host == '172.10.1.21': # Diferenciar sensores por sus hosts
-            connection: HTTPConnection = self.__get_connection()
-            direccion = '/sensors/values'
-            connection.request('GET', direccion)
-            response: HTTPResponse = connection.getresponse()
-            if response.status == 200:
-                response_data_json = response.read()
-                response_data = json.loads(response_data_json)
-                return response_data
-            elif response.status == 400:
-                return "El servicio no tiene sensores"
-            else:
-                return "Error inesperado ocurrido: " + str(response.status)
-        elif self.__host == '172.10.1.22':
-            return '- Sensor no disponible'
+    def get_all_values(self) -> dict:
+        connection: HTTPConnection = self.__get_connection()
+        direccion = '/sensors/values'
+        connection.request('GET', direccion)
+        response: HTTPResponse = connection.getresponse()
+        if response.status == 200:
+            response_data_json = response.read()
+            response_data = json.loads(response_data_json)
+            return response_data
+        elif response.status == 400:
+            return {}
+        else:
+            print('Error inesperado ocurrido: ' + str(response.status))
+            return {}
+
+    def get_tipos_posibles(self)->dict:
+        connection: HTTPConnection = self.__get_connection()
+        direccion = '/sensors/types'
+        connection.request('GET', direccion)
+        response: HTTPResponse = connection.getresponse()
+        print(response.status)
+        if response.status == 200:
+            response_data_json = response.read()
+            response_data = json.loads(response_data_json)
+            return response_data
+        else:
+            print('Error inesperado ha ocurrido')
+            return {}
