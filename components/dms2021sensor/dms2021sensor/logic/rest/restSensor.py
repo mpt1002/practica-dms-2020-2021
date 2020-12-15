@@ -44,3 +44,10 @@ class RestSensor():
         res_content_json = json.dumps(self.__tipo_sensores)
         return RestResponse(res_content_json, 200, mime_type='application/json')
 
+    def set_sensor(self, sensorName: str, sensorType : str, parameters = "")-> RestResponse:
+        tipo_sensor = self.__tipo_sensores[sensorType]
+        if sensorType not in self.__tipo_sensores or sensorName not in self.__sensores:
+            return RestResponse('Not found', 404, 'text/plain')
+        if tipo_sensor == self.__tipo_sensores['sensorFile']:
+            self.__sensores[sensorName] = SensorFile(parameters)
+            return RestResponse('OK', 200, 'text/plain')

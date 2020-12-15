@@ -44,7 +44,7 @@ class AjusteSensoresEstado():
                 for tipo in tipo_sensores:
                     print(str(tipo_sensores[tipo]) + '. ' + str(tipo))
                 eleccion = int(input('Elija su opción\n'))
-                if eleccion > 0 and eleccion <= tipo_sensores:
+                if eleccion > 0 and eleccion <= len(tipo_sensores):
                     break
             if eleccion ==1:
                 self.ajustar_sensor_de_ficheros(sensor)
@@ -54,4 +54,6 @@ class AjusteSensoresEstado():
             print('Error obteniendo los tipos de los sensores del servicio sensor')
 
     def ajustar_sensor_de_ficheros(self, sensor):
-        pass
+        print('¿Què fichero desea monitorizar?')
+        nombre_fichero = input('Introduzca la ruta absoluta')
+        

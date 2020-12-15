@@ -73,3 +73,19 @@ class SensorService():
         else:
             print('Error inesperado ha ocurrido')
             return {}
+
+    def set_sensor(self, sensor : str, tipoSensor : str, parameters = ""):
+        form: str = urlencode({'sensor_type': tipoSensor, 'parameters': parameters})
+        headers: dict = {
+            'Content-type': 'application/x-www-form-urlencoded'
+        }
+        connection: HTTPConnection = self.__get_connection()
+        direccion = '/sensors/' + str(sensor)
+        connection.request('POST', direccion, form, headers)
+        response: HTTPResponse = connection.getresponse()
+        if response.status == 200:
+            print('sensor actualizado satisfactoriamente')
+        elif response.status == 404:
+            print('Argumentos enviados inválidos')
+        else:
+            print('Error inesperado a ocurrido')
