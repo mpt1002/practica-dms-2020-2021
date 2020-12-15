@@ -8,11 +8,13 @@ class SensorFile (Sensor):
         self.__file = file
 
     def monitorizar(self):
-        #devuelto : str = os.system("find "+ self.__file)
-        pwd : str = os.system("pwd")
-        print(pwd)
-        devuelto : str = os.system("find . -name "+self.__file)
-        if devuelto != "":
+        encontrado : bool =  False
+        for files in os.walk('/'):
+            if self.__file in files:
+                encontrado = True
+                break
+
+        if encontrado:
             return '\t--> Fichero '+str(self.__file)+' se ha encontrado.\n'
         else:
             return '\t--> Fichero '+str(self.__file)+' NO se ha encontrado.\n'
