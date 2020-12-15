@@ -9,7 +9,7 @@ class SensorFile (Sensor):
 
     def monitorizar(self):
         encontrado : bool =  False
-        for files in os.walk('/'):
+        for root, _, files in os.walk('/'):
             if self.__file in files:
                 encontrado = True
                 break
