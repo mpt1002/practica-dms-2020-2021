@@ -110,7 +110,7 @@ class ManejadorPagina:
             print('¿Qué servicio sensor desea monitorizar?')
             print('\t1. Sensor 1')
             print('\t2. Sensor 2')
-            opcion = int(input('Elija un sensor'))
+            opcion = int(input('Elija un servicio sensor\n'))
             if opcion == 1:
                 return SensorService(self.__cfg.get_sensor1_service_host(), self.__cfg.get_sensor1_service_port())
             elif opcion == 2:
