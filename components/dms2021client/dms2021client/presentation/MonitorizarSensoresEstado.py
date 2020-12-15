@@ -14,7 +14,12 @@ class MonitorizarSensoresEstado(ServiciosEstado):
         print('Valores de monitorizacion de cada sensor')
         if self.__auth_service.hasRigth(self.__username, 'ViewReports'):
             if self.__sensor_service.is_running():
-                print(str(self.__sensor_service.get_all_values()))
+                devuelto : str = "Sensores:\n"
+                response_data = self.__sensor_service.get_all_values()
+                for s in response_data:
+                    devuelto = devuelto + '\t'+str(s) + ":\n"
+                    devuelto = devuelto + "\t" + str(response_data[s]) + "\n"
+                print(devuelto)
             else:
                 print("ERROR: No se ha podido establecer contacto con el servicio sensor")
         else:

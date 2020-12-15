@@ -49,7 +49,6 @@ class SensorService():
             return '- Sensor no disponible'
 
     def get_all_values(self):
-        devuelto : str = "Sensores:\n"
         if self.__host == '172.10.1.21': # Diferenciar sensores por sus hosts
             connection: HTTPConnection = self.__get_connection()
             direccion = '/sensors/values'
@@ -58,10 +57,7 @@ class SensorService():
             if response.status == 200:
                 response_data_json = response.read()
                 response_data = json.loads(response_data_json)
-                for s in response_data:
-                    devuelto = devuelto + '\t'+str(s) + ":\n"
-                    devuelto = devuelto + "\t" + str(response_data[s]) + "\n"
-                return devuelto
+                return response_data
             elif response.status == 400:
                 return "El servicio no tiene sensores"
             else:
