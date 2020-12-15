@@ -18,12 +18,12 @@ class ManejadorPagina:
     __sensor_service : SensorService
 
     def __init__(self):
-        print('ESTOY EN MANEJADOR PAGINA')
+        print('Bienvenido\nEl programa se esta inicializando')
         self.__cfg = ClientConfiguration()
         self.__cfg.load_from_file(self.__cfg.default_config_file())
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
         self.__session_id, self.__username = self.login()
-        print('HE VUELTO DEL LOGIN')
+        print('Contacto establecido')
         
         # Ir al estado inicial
         self.__estado = MenuEstado(self.__session_id)
@@ -38,6 +38,8 @@ class ManejadorPagina:
             elif opcion == 2:
                 self.__estado = ModificarPermisosEstado(self.__session_id, self.__username, self.__auth_service)
             elif opcion == 3:
+                print('FALTA CÓDIGO')
+                print('PAGINA PENDIENTE DE IMPLEMENTACIÓN, ESPERE HASTA LA ENTREGA 2')
                 self.__sensor_service = self.__get_sensor_service()
                 self.__estado = GestionarSensoresEstado(self.__session_id, self.__username, self.__auth_service, self.__sensor_service)
             elif opcion == 4:
@@ -81,7 +83,7 @@ class ManejadorPagina:
         return self.__auth_service
 
     def login(self) -> str:
-        print('ESTOY EN LOGIN')
+        print('Estableciendo contacto con el servidor, por favor espere')
         while not self.__auth_service.is_running():
             time.sleep(1)
         print('\nAuthentication service up!')
