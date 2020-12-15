@@ -1,6 +1,6 @@
 from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
 from dms2021client.data.rest import AuthService
-from ..presentation import ServiciosEstado
+from .serviciosEstado import ServiciosEstado
 
 class ExitEstado(ServiciosEstado):
 

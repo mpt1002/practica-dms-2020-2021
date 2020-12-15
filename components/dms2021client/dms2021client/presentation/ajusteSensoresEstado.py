@@ -1,4 +1,4 @@
-from ..presentation import ServiciosEstado
+from .serviciosEstado import ServiciosEstado
 from dms2021client.data.rest import AuthService, SensorService
 
 class AjusteSensoresEstado():
@@ -18,7 +18,6 @@ class AjusteSensoresEstado():
         '''Asegurarse de que el usuario tiene permisos de ajuste de los sensores
         '''
         print('Modificar las reglas de monitorización de los sensores')
-        print('FALTA CODIGO')
         #Comprobar si el usuario tiene los permisos de gestion de sensores
         if self.__auth_service.hasRigth(self.__username, 'AdminRules'):
             print('Tienes los permisos necesarios para modificar las reglas de monitorización de los sensores')

@@ -1,14 +1,12 @@
-from ..presentation import ServiciosEstado
+from .serviciosEstado import ServiciosEstado
 from dms2021client.data.rest import SensorService, AuthService
 
 class MonitorizarSensoresEstado(ServiciosEstado):
-    __sensor_service : SensorService
-    __username : str
-    __auth_service: AuthService
+
     def __init__(self, username : str, auth_service: AuthService, sensorservice : SensorService):
-        self.__username = username
-        self.__sensor_service = sensorservice
-        self.__auth_service = auth_service
+        self.__username : str = username
+        self.__sensor_service :SensorService = sensorservice
+        self.__auth_service : AuthService = auth_service
 
     def ejecutarPagina(self) -> int:
         print('Valores de monitorizacion de cada sensor')

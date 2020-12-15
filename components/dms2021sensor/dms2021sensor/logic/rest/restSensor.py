@@ -34,11 +34,12 @@ class RestSensor():
         return RestResponse(res_content_json, 200, mime_type='application/json')
 
     def obtenerTodosSensores(self) -> RestResponse:
-        devuelto: str = self.__sensores.keys()
-        if devuelto == '[]':
+        devuelto = self.__sensores.keys()
+        if devuelto == []:
             return RestResponse('No sensors', 404, 'text/plain')
         else:
-            return RestResponse(devuelto, 200, 'text/plain')
+            res_content_json = json.dumps(devuelto)
+            return RestResponse(res_content_json, 200, 'text/plain')
 
     def get_posibles_tipos(self)->RestResponse:
         res_content_json = json.dumps(self.__tipo_sensores)
@@ -48,6 +49,6 @@ class RestSensor():
         tipo_sensor = self.__tipo_sensores[sensorType]
         if sensorType not in self.__tipo_sensores or sensorName not in self.__sensores:
             return RestResponse('Not found', 404, 'text/plain')
-        if tipo_sensor == self.__tipo_sensores['sensorFile']:
+        else:
             self.__sensores[sensorName] = SensorFile(parameters)
             return RestResponse('OK', 200, 'text/plain')

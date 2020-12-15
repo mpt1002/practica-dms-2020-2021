@@ -73,6 +73,7 @@ class ManejadorPagina:
     # Asignar una nueva opcion
     def set_opcion(self, opcion: int) -> int:
         self.__opcion = opcion
+        return opcion
 
     # Obtener la configuracion del cliente actual
     def get_cfg(self) -> ClientConfiguration:
@@ -82,7 +83,7 @@ class ManejadorPagina:
     def get_auth_service(self) -> AuthService:
         return self.__auth_service
 
-    def login(self) -> str:
+    def login(self):
         print('Estableciendo contacto con el servidor, por favor espere')
         while not self.__auth_service.is_running():
             time.sleep(1)
