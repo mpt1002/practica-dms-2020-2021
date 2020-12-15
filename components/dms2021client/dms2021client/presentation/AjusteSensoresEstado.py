@@ -53,7 +53,8 @@ class AjusteSensoresEstado():
         else:
             print('Error obteniendo los tipos de los sensores del servicio sensor')
 
-    def ajustar_sensor_de_ficheros(self, sensor):
+    def ajustar_sensor_de_ficheros(self, sensor: str):
         print('¿Què fichero desea monitorizar?')
-        nombre_fichero = input('Introduzca la ruta absoluta')
+        nombre_fichero = input('Introduzca la ruta absoluta\n')
+        self.__sensor_service.set_sensor(sensor, 'sensorFile', nombre_fichero)
         
