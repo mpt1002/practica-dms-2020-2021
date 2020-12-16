@@ -84,22 +84,25 @@ class ManejadorPagina:
         return self.__auth_service
 
     def login(self):
-        print('Estableciendo contacto con el servidor, por favor espere')
+        print('Estableciendo contacto con el servidor, por favor espere...')
         while not self.__auth_service.is_running():
             time.sleep(1)
-        print('\nAuthentication service up!')
-        
-        
-        print('Press Ctrl+C to end this process.')
-        print('If run as a docker container, press Ctrl+P,Ctrl+Q to detach from the container.')
-        username: str = input('Username: ')
-        password: str = getpass('Password: ')
+
+        print('\033[1;33m'+'LOGIN')
+        username: str = input('\t- Username: ')
+        password: str = getpass('\t- Password: ')
+        print('\033[0m')
         try:
             self.__session_id = self.__auth_service.login(username, password)
             self.__username = username
-            print('Logged in successfully as ' + username + ' . Session id: ' + self.__session_id)
+            print('\033[1;32m')
+            print('\tLogged in successfully as ' + username + ' . Session id: ' + self.__session_id)
+            print('\033[0m')
         except InvalidCredentialsError:
-            print('Wrong username and/or password. Try again.')
+            print('\033[1;31m')
+            print('\tWrong username and/or password. Try again.')
+            print('\033[0m')
+            self.__session_id, self.__username = self.login()
         except Exception as ex:
             print(ex)
 
@@ -108,11 +111,19 @@ class ManejadorPagina:
     def __get_sensor_service(self) -> SensorService:
         opcion:int = 0
         while True:
-            print('¿Qué servicio sensor desea monitorizar?')
-            print('\t1. Sensor 1')
-            print('\t2. Sensor 2')
-            opcion = int(input('Elija un servicio sensor\n'))
+            print('\033[1;33m')
+            print('\t¿Qué servicio sensor desea monitorizar?')
+            print('\t\t1. Sensor 1')
+            print('\t\t2. Sensor 2')
+            opcion = int(input('\t\tElija un servicio sensor: '))
+            print('\033[0m')
             if opcion == 1:
                 return SensorService(self.__cfg.get_sensor1_service_host(), self.__cfg.get_sensor1_service_port())
             elif opcion == 2:
                 return SensorService(self.__cfg.get_sensor2_service_host(), self.__cfg.get_sensor2_service_port())
+            else:
+                print('\033[1;31m')
+                print('\tOpción elegida no válida. Vuelve a intentarlo.')
+                print('\033[0m')
+                self.__sensor_service = self.__get_sensor_service()
+

@@ -128,16 +128,26 @@ class AuthService():
         connection.request('POST', direccion, form, headers)
         response: HTTPResponse = connection.getresponse()
         if response.status == 200:
+            print('\033[1;32m')
             print('Usuario creado correctamente')
+            print('\033[0m')
         elif response.status == 400:
+            print('\033[1;31m')
             print('Los parametros pasados son invalidos')
+            print('\033[0m')
         elif response.status == 401:
+            print('\033[1;31m')
             print('No tiene permisos para crear usuarios')
+            print('\033[0m')
         elif response.status == 409:
+            print('\033[1;31m')
             print('El usuario que se intenta crear ya existe')
+            print('\033[0m')
         else:
+            print('\033[1;31m')
             print('Error inesperado ha ocurrido')
             print('ERROR ' + str(response.status))
+            print('\033[0m')
 
     def giveRight(self, username : str, rigthName : str, session_id : str):
         form: str = urlencode({'username': username, 'rigth_name': rigthName, 'session_id': session_id})
@@ -149,13 +159,21 @@ class AuthService():
         connection.request('POST', direccion, form, headers)
         response: HTTPResponse = connection.getresponse()
         if response.status == 200:
+            print('\033[1;32m')
             print('Permiso otorgado satisfactoriamente')
+            print('\033[0m')
         elif response.status == 401:
+            print('\033[1;31m')
             print('No tienes los permisos necesarios para otorgar permisos')
+            print('\033[0m')
         elif response.status == 404:
+            print('\033[1;31m')
             print('Argumentos pasados incorrectos')
+            print('\033[0m')
         else:
+            print('\033[1;31m')
             print('Error inesperado ocurrido')
+            print('\033[0m')
 
     def revokeRight(self, username : str, rigthName : str, session_id : str):
         form: str = urlencode({'username': username, 'rigth_name': rigthName, 'session_id': session_id})
@@ -167,11 +185,19 @@ class AuthService():
         connection.request('DELETE', direccion, form, headers)
         response: HTTPResponse = connection.getresponse()
         if response.status == 200:
+            print('\033[1;32m')
             print('Permiso revocados satisfactoriamente')
+            print('\033[0m')
         elif response.status == 401:
+            print('\033[1;31m')
             print('No tienes los permisos necesarios para revocar permisos')
+            print('\033[0m')
         elif response.status == 404:
+            print('\033[1;31m')
             print('Argumentos pasados incorrectos')
+            print('\033[0m')
         else:
+            print('\033[1;31m')
             print('Error inesperado ocurrido')
+            print('\033[0m')
 

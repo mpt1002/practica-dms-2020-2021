@@ -17,21 +17,24 @@ class AjusteSensoresEstado():
     def ejecutarPagina(self) -> int:
         '''Asegurarse de que el usuario tiene permisos de ajuste de los sensores
         '''
-        print('Modificar las reglas de monitorización de los sensores')
+        print('\033[1;33m'+'OPCIÓN 4: Modificar las reglas de monitorización de cada sensor')
+        print('\033[0m')
         #Comprobar si el usuario tiene los permisos de gestion de sensores
         if self.__auth_service.hasRigth(self.__username, 'AdminRules'):
-            print('Tienes los permisos necesarios para modificar las reglas de monitorización de los sensores')
+            print('\033[1;32m'+'\tTienes los permisos necesarios para modificar las reglas de monitorización de los sensores'+'\033[0m')
             sensores = self.__sensor_service.get_all_values()
-            print('¿A que sensor desea cambiarle los ajustes?')
+            print('\033[1;33m')
+            print('\t¿A que sensor desea cambiarle los ajustes?')
             for sensor in sensores:
-                print('\t->' + str(sensor))
-            sensor_cambio: str = input('Introduzca el nombre del sensor\n')
+                print('\t\t-> ' + str(sensor))
+            sensor_cambio: str = input('\t\t- Introduzca el nombre del sensor: ')
+            print('\033[0m')
             if sensor_cambio in sensores:
                 self.__cambiar_ajustes_sensor(sensor_cambio)
             else:
-                print('Ese sensor no existe')
+                print('\033[1;31m'+'Ese sensor no existe'+'\033[0m')
         else:
-            print('No tienes los permisos necesarios para modificar las reglas de monitorización de los sensores')
+            print('\033[1;31m'+'No tienes los permisos necesarios para modificar las reglas de monitorización de los sensores'+'\033[0m')
         return 0
 
     def __cambiar_ajustes_sensor(self, sensor : str):
@@ -39,21 +42,26 @@ class AjusteSensoresEstado():
         tipo_sensores = self.__sensor_service.get_tipos_posibles()
         if tipo_sensores != {}:
             while True:
-                print('¿Qué tipo de sensor quieres que sea ahora ' + str(sensor))
+                print('\033[1;33m')
+                print('\t¿Qué tipo de sensor quieres que sea ahora ' + str(sensor)+' ?')
                 for tipo in tipo_sensores:
-                    print(str(tipo_sensores[tipo]) + '. ' + str(tipo))
-                eleccion = int(input('Elija su opción\n'))
+                    print('\t\t'+str(tipo_sensores[tipo]) + '. ' + str(tipo))
+                eleccion = int(input('\t\tElija su opción: '))
                 if eleccion > 0 and eleccion <= len(tipo_sensores):
                     break
+                print('\033[0m')
             if eleccion ==1:
                 self.ajustar_sensor_de_ficheros(sensor)
             else:
-                print('Un error inesperado ha ocurrido, vuelva a intentarlo')
+                print('\033[1;31m'+'\tOpción elegida no válida. Vuelve a intentarlo.'+'\033[0m')
+                self.__cambiar_ajustes_sensor(sensor)
         else:
-            print('Error obteniendo los tipos de los sensores del servicio sensor')
+            print('\033[1;31m'+'Error obteniendo los tipos de los sensores del servicio sensor'+'\033[0m')
 
     def ajustar_sensor_de_ficheros(self, sensor: str):
-        print('¿Què fichero desea monitorizar?')
-        nombre_fichero = input('Introduzca el nombre del fichero que desea buscar:\n')
+        print('\033[1;33m')
+        print('\t¿Qué fichero desea monitorizar?')
+        nombre_fichero = input('\t\t- Introduzca el nombre del fichero que desea buscar: ')
         self.__sensor_service.set_sensor(sensor, 'sensorFile', nombre_fichero)
+        print('\033[0m')
         

@@ -41,9 +41,9 @@ class SensorService():
             response_data = json.loads(response_data_json)
             return response_data[sensorName]
         elif response.status == 404:
-            print('Ese sensor no existe')
+            print('\033[1;31m'+'Ese sensor no existe'+'\033[0m')
         else:
-            print('Error inesperado ha ocurrido')
+            print('\033[1;31m'+'Error inesperado ha ocurrido'+'\033[0m')
 
     def get_all_values(self) -> dict:
         connection: HTTPConnection = self.__get_connection()
@@ -57,7 +57,7 @@ class SensorService():
         elif response.status == 400:
             return {}
         else:
-            print('Error inesperado ocurrido: ' + str(response.status))
+            print('\033[1;31m'+'Error inesperado ocurrido: ' + str(response.status)+'\033[0m')
             return {}
 
     def get_tipos_posibles(self)->dict:
@@ -65,13 +65,12 @@ class SensorService():
         direccion = '/sensors/types'
         connection.request('GET', direccion)
         response: HTTPResponse = connection.getresponse()
-        print(response.status)
         if response.status == 200:
             response_data_json = response.read()
             response_data = json.loads(response_data_json)
             return response_data
         else:
-            print('Error inesperado ha ocurrido')
+            print('\033[1;31m'+'Error inesperado ha ocurrido'+'\033[0m')
             return {}
 
     def set_sensor(self, sensor : str, tipoSensor : str, parameters = ""):
@@ -84,8 +83,8 @@ class SensorService():
         connection.request('POST', direccion, form, headers)
         response: HTTPResponse = connection.getresponse()
         if response.status == 200:
-            print('sensor actualizado satisfactoriamente')
+            print('\033[1;32m'+'sensor actualizado satisfactoriamente'+'\033[0m')
         elif response.status == 404:
-            print('Argumentos enviados inválidos')
+            print('\033[1;31m'+'Argumentos enviados inválidos'+'\033[0m')
         else:
-            print('Error inesperado a ocurrido')
+            print('\033[1;31m'+'Error inesperado a ocurrido'+'\033[0m')

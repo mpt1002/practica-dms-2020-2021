@@ -15,32 +15,45 @@ class ModificarPermisosEstado(ServiciosEstado):
     def ejecutarPagina(self) -> int:
         #Comprobar si el usuario tiene los permisos de modificacion
         if self.__auth_service.hasRigth(self.__username , 'AdminRights'):
-            print('Modificación de permisos')
-            print('¿A què usuario desea modificarle los permisos?')
-            user : str = input('Introduzca el nombre del usuario:\n')
+            print('\033[1;33m'+'OPCIÓN 2: Modificar Permisos')
+            print('\t- ¿A qué usuario desea modificarle los permisos?')
+            user : str = input('\t- Introduzca el nombre del usuario: ')
             decision = 0
             while True:
-                print('1. Añadir permisos')
-                print('2. Revocar permisos')
-                decision = int(input())
+                print('\t¿Qué acción desea realizar?')
+                print('\t\t1. Añadir permisos')
+                print('\t\t2. Revocar permisos')
+                decision = int(input('\t\t- Introduzca una opción: '))
                 if decision == 1 or decision == 2:
-                    print('ENTRO')
                     break
+                else: 
+                    print('\033[1;31m')
+                    print('\tOpción elegida no disponible. Vuelve a intentarlo.')
+                    print('\033[0m')
+            print('\033[0m')
             if decision == 1:
                 self.annadirPermiso(user)
             elif decision == 2:
                 self.revocarPermiso(user)
 
         else:
+            print('\033[1;31m')
             print('No tienes los permisos necesarios para modificar permisos')
+            print('\033[0m')
         return 0
 
     def annadirPermiso(self, user : str):
-        print('¿Qué permiso desea añadir?')
-        permiso: str = input()
+        print('\033[1;33m')
+        print('\t\t¿Qué permiso desea añadir?')
+        print('\t\t\t- Posibles permisos: AdminUsers, AdminRights, AdminSensors, AdminRules, ViewReports')
+        permiso: str = input('\t\t\t- Introduce el permiso: ')
+        print('\033[0m')
         self.__auth_service.giveRight(user, permiso, self.__session_id)
 
     def revocarPermiso(self, user: str):
-        print('¿Qué permiso desea revocar?')
-        permiso: str = input()
+        print('\033[1;33m')
+        print('\t\t¿Qué permiso desea revocar?')
+        print('\t\t\t- Posibles permisos: AdminUsers, AdminRights, AdminSensors, AdminRules, ViewReports')
+        permiso: str = input('\t\t\t- Introduce el permiso: ')
+        print('\033[0m')
         self.__auth_service.revokeRight(user, permiso, self.__session_id)
