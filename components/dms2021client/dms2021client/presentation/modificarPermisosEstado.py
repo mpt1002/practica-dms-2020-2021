@@ -48,7 +48,11 @@ class ModificarPermisosEstado(ServiciosEstado):
         print('\t\t\t- Posibles permisos: AdminUsers, AdminRights, AdminSensors, AdminRules, ViewReports')
         permiso: str = input('\t\t\t- Introduce el permiso: ')
         print('\033[0m')
-        self.__auth_service.giveRight(user, permiso, self.__session_id)
+        if self.__auth_service.hasRigth(user, permiso):
+            print('\033[1;31m'+'\tEl usuario '+str(user)+' ya tiene el permiso '+str(permiso)+' por lo tanto no se puede volver a asignar. Vuelve a intentarlo.'+'\033[0m')
+            self.annadirPermiso(user)
+        else:
+            self.__auth_service.giveRight(user, permiso, self.__session_id)
 
     def revocarPermiso(self, user: str):
         print('\033[1;33m')
@@ -56,4 +60,8 @@ class ModificarPermisosEstado(ServiciosEstado):
         print('\t\t\t- Posibles permisos: AdminUsers, AdminRights, AdminSensors, AdminRules, ViewReports')
         permiso: str = input('\t\t\t- Introduce el permiso: ')
         print('\033[0m')
-        self.__auth_service.revokeRight(user, permiso, self.__session_id)
+        if self.__auth_service.hasRigth(user, permiso):
+            self.__auth_service.revokeRight(user, permiso, self.__session_id)
+        else:
+            print('\033[1;31m'+'\tEl usuario '+str(user)+' no tiene el permiso '+str(permiso)+' por lo tanto no se puede revocar. Vuelve a intentarlo.'+'\033[0m')
+            self.revocarPermiso(user)

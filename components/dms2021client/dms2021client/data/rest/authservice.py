@@ -111,7 +111,6 @@ class AuthService():
         if response.status == 200:
             return True
         elif response.status == 404:
-            print('ERROR 404')
             return False
         else:
             print('Error al comprobar si el usuario tiene permisos')
