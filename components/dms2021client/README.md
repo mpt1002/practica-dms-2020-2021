@@ -63,3 +63,4 @@ clase `ServiciosEstado` y los `estados concretos` que heredan de este `AjusteSen
 - `ManejadorPagina` se encarga de la transición entre los distintos `estados concretos`.
 - `ManejadorPagina` entra en pide a `ClientConfiguration` (`config/clientConfig.py`) los datos necesarios para establecer contacto con los servicios sensores y el servicio de autenticacion.
 - Los `estados concretos` hacen uso de las clases `AuthService` y `SensorService`para comunicarse con los servicios de autenticación y los servicios sensores y pedir y modificar datos de los servicios.
+- `ManejadorPagina` asigna a los `estados concretos` los servicios con los que van a interacituar.
