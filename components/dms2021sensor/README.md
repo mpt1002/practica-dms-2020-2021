@@ -29,9 +29,9 @@ The configuration file is a YAML dictionary with the following configurable para
 
 ## Running the service
 
-Just run `dms2021sensor` as any other program.
+As only sensor1 is implemented, it can only be executed throught the command `dms2021sensor1` as any other program.
 
-## REST API specification
+## REST API specification for sensor1
 
 This service exposes a REST API so other services/applications can interact with it.
 
@@ -75,3 +75,22 @@ This service exposes a REST API so other services/applications can interact with
   -Returns:
     - `200 values of sensors` if the values of every sensor was sent succesfuly
     -`404 Not found`if the sensor service has no sensors
+
+
+# Arquitectura
+
+## Diagrama UML
+
+## Descripción de la arquitectua
+
+dms2021sensor esta dividido en dos carpetas `data` y `logic`. 
+ - En la carpeta `data` podemos encontrar:
+   - Dentro de la carpeta `config`, un fichero `sensorconfiguration.py` mediante el cual se obtienen los datos necesarios para establecer el servicio.
+   - También nos encotramos con el fichero `Sensor.py` donde está definido una clase abstracta denominada 'Sensor' y un método abstracto 'monitorizar'. Esta clase es utilizada para definir los diferentes sensores que componen esta práctica.
+   - Finalmente nos encontramos con `SensorFile.py` en el cuál esta definida la clase 'SensorFile' la cuál implementa la clase abtracta anteriormente mencionada 'Sensor' así como el correspondiente método 'monitorizar'. Mediante esta clase se determina la existencia o no, de un determinado fichero en el sistema.
+   - Adicionalmente, también encontramos un fichero de texto 'ficheroABuscar.txt' que es usado como fichero por defecto para realizar la búsqueda.
+ - En la carpeta `logic` podemos encontrar:
+   - Una carpeta denomida 'exc':
+     - Donde encontramos `sensorerror.py` donde esta definido `SensorError` que lanza excepciones.
+   - Una carpeta 'rest':
+     - Que contine el fichero `restSensor.py` que contiene la clase `RestSensor` mediante la cual se establece la conexion del servicio.
