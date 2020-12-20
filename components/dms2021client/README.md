@@ -46,6 +46,7 @@ Las acciones que puedes realizar en este programa son:
 
 ## Arquitectura
 ### Diagrama UML
+![header](https://https://github.com/mpt1002/practica-dms-2020-2021/edit/master/components/dms2021client/Clases1.3.png)
 
 ### Descripción de la arquitectura
 dms2021client esta dividido en tres carpetas: `data`, `logic` y `presentation`. Estas tres carpetas siguen un planteamiento MVC (modelo, vista, controlador).
