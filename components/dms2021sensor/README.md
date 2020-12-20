@@ -80,6 +80,7 @@ This service exposes a REST API so other services/applications can interact with
 # Arquitectura
 
 ## Diagrama UML
+Consultar imagen Sensores.png
 
 ## Descripción de la arquitectua
 
