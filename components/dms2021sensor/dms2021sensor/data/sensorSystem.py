@@ -5,7 +5,7 @@ class SensorSystem(Sensor):
     __parametros:str
     __porcentaje:int
 
-    def __init__(self, parametros:str, porcentaje:int = 50):
+    def __init__(self, parametros:str = 'Mem', porcentaje:int = 50):
         # parametros, que caracteristicas del sistema se quiere monitorizar
         self.__parametros = parametros
         self.__porcentaje = porcentaje
@@ -18,6 +18,6 @@ class SensorSystem(Sensor):
         dif:float = float(memTotal) - float(memFree)
         
         if dif > float(memTotal)*(self.__porcentaje/100):
-            return proceso + "La "+self.__parametros+" usada supera el "+str(self.__porcentaje)+"%\n"
+            return "--> " + str(proceso) + "La "+self.__parametros+" usada supera el "+str(self.__porcentaje)+"%\n"
         else:
-            return proceso + "La "+self.__parametros+" usada NO supera el "+str(+self.__porcentaje)+"%\n"
+            return "--> " + str(proceso) + "La "+self.__parametros+" usada NO supera el "+str(+self.__porcentaje)+"%\n"

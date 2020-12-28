@@ -88,10 +88,15 @@ dms2021sensor esta dividido en dos carpetas `data` y `logic`.
  - En la carpeta `data` podemos encontrar:
    - Dentro de la carpeta `config`, un fichero `sensorconfiguration.py` mediante el cual se obtienen los datos necesarios para establecer el servicio.
    - También nos encotramos con el fichero `Sensor.py` donde está definido una clase abstracta denominada 'Sensor' y un método abstracto 'monitorizar'. Esta clase es utilizada para definir los diferentes sensores que componen esta práctica.
-   - Finalmente nos encontramos con `SensorFile.py` en el cuál esta definida la clase 'SensorFile' la cuál implementa la clase abtracta anteriormente mencionada 'Sensor' así como el correspondiente método 'monitorizar'. Mediante esta clase se determina la existencia o no, de un determinado fichero en el sistema.
-   - Adicionalmente, también encontramos un fichero de texto 'ficheroABuscar.txt' que es usado como fichero por defecto para realizar la búsqueda.
+   - Finalmente nos encontramos con `SensorFile.py` y `SensorSystem.py`, los cuales tienen las clases concretas que heredan de Sensor e implementan el metodo monitorizar.
  - En la carpeta `logic` podemos encontrar:
    - Una carpeta denomida 'exc':
      - Donde encontramos `sensorerror.py` donde esta definido `SensorError` que lanza excepciones.
-   - Una carpeta 'rest':
+   - Una carpeta `rest`:
      - Que contine el fichero `restSensor.py` que contiene la clase `RestSensor` mediante la cual se establece la conexion del servicio.
+     
+##Tipos de sensores
+   - `SensorFile.py` en el cuál esta definida la clase 'SensorFile', implementa la clase abtracta anteriormente mencionada 'Sensor' así como el correspondiente método 'monitorizar'. Mediante esta clase se determina la existencia o no, de un determinado fichero en el sistema.
+     - El fichero de texto 'ficheroABuscar.txt' es usado como fichero por defecto para realizar la búsqueda. Este fichero se encuenta en la misma carpeta `data` que `sensorFile.py`.
+   - `SensoRSystem.py` en el cuál esta definida la clase 'SensorFile', implementa la clase abtracta anteriormente mencionada 'Sensor' así como el correspondiente método 'monitorizar'. Mediante esta clase se comprueban dos posibles tipos de memoria, la memoria `RAM` del sistema o la memoria `Swap`. Adicionalmente, el mètodo 'monitorizar' compruba si la memoria ocupada excede un porcentaje o no.
+     - Por defecto, se monitoriza la memoria RAM y se comprueba si se excede el porcentaje del 50% de memoria.

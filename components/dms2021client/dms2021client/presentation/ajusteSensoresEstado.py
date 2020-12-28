@@ -50,8 +50,10 @@ class AjusteSensoresEstado():
                 if eleccion > 0 and eleccion <= len(tipo_sensores):
                     break
                 print('\033[0m')
-            if eleccion ==1:
+            if eleccion == tipo_sensores['sensorFile']:
                 self.ajustar_sensor_de_ficheros(sensor)
+            elif eleccion == tipo_sensores['sensorSystem']:
+                self.ajustar_sensor_de_sistema(sensor)
             else:
                 print('\033[1;31m'+'\tOpción elegida no válida. Vuelve a intentarlo.'+'\033[0m')
                 self.__cambiar_ajustes_sensor(sensor)
@@ -63,5 +65,17 @@ class AjusteSensoresEstado():
         print('\t¿Qué fichero desea monitorizar?')
         nombre_fichero = input('\t\t- Introduzca el nombre del fichero que desea buscar: ')
         self.__sensor_service.set_sensor(sensor, 'sensorFile', nombre_fichero)
+        print('\033[0m')
+
+    def ajustar_sensor_de_sistema(self, sensor: str):
+        print('\033[1;33m')
+        while True:
+            print('\t¿Qué desea monitorizar?')
+            print('\t-> Mem')
+            print('\t-> Swap')
+            tipo_monitorización = input('\t\t- Introduzca su elección: ')
+            if tipo_monitorización == 'Mem' or tipo_monitorización == 'Swap':
+                break
+        self.__sensor_service.set_sensor(sensor, 'sensorSystem', tipo_monitorización)
         print('\033[0m')
         

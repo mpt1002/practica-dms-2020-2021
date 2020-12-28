@@ -51,10 +51,12 @@ class RestSensor():
         if sensorType not in self.__tipo_sensores or sensorName not in self.__sensores:
             return RestResponse('Not found', 404, 'text/plain')
         else:
-            if sensorName == 'sensorFile':
+            if sensorType == 'sensorFile':
                 self.__sensores[sensorName] = SensorFile(parameters)
                 return RestResponse('OK', 200, 'text/plain')
-            else:
+            elif sensorType == 'sensorSystem':
                 self.__sensores[sensorName] = SensorSystem(parameters)
                 return RestResponse('OK', 200, 'text/plain')
+            else:
+                return RestResponse('BAD ARGUMENTS', 400, 'text/plain')
 
