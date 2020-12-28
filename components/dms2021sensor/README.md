@@ -95,7 +95,7 @@ dms2021sensor esta dividido en dos carpetas `data` y `logic`.
    - Una carpeta `rest`:
      - Que contine el fichero `restSensor.py` que contiene la clase `RestSensor` mediante la cual se establece la conexion del servicio.
      
-##Tipos de sensores
+## Tipos de sensores
    - `SensorFile.py` en el cuál esta definida la clase 'SensorFile', implementa la clase abtracta anteriormente mencionada 'Sensor' así como el correspondiente método 'monitorizar'. Mediante esta clase se determina la existencia o no, de un determinado fichero en el sistema.
      - El fichero de texto 'ficheroABuscar.txt' es usado como fichero por defecto para realizar la búsqueda. Este fichero se encuenta en la misma carpeta `data` que `sensorFile.py`.
    - `SensoRSystem.py` en el cuál esta definida la clase 'SensorFile', implementa la clase abtracta anteriormente mencionada 'Sensor' así como el correspondiente método 'monitorizar'. Mediante esta clase se comprueban dos posibles tipos de memoria, la memoria `RAM` del sistema o la memoria `Swap`. Adicionalmente, el mètodo 'monitorizar' compruba si la memoria ocupada excede un porcentaje o no.
