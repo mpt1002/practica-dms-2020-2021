@@ -59,6 +59,23 @@ This service exposes a REST API so other services/applications can interact with
     - `200 OK` if the sensor was succesfully updated
     - `404 Not found` if the recieved parameters are invalid
     
+- `/sensors/<str: sensorname>/new` [`POST`]
+  Gets the value monitorized by the specified sensor
+  - Parameters: 
+    - `sensorname` [path] (`str`): The sensor name
+    - `sensor_type` [from data] (`str`): type of the sensor
+    - `parameters` [from data] (`str''): aditional parameters for the new sensor type
+  - Returns:
+    - `200 OK` if the sensor was succesfully updated
+    - `404 Not found` if the recieved parameters are invalid
+    
+- `/sensors/<str: sensorname>` [`DELETE`]
+  Remove de sensor of the specified name
+  - Parameters:
+    -`sensorname` [path] (`str`): The sensor name
+  - Returns:
+    -`200 OK` if the sensor was succesfully removed
+    
 - `/sensors` [`GET`]
   Gets all the names of the monitorized sensors
   - Returns:
@@ -100,3 +117,7 @@ dms2021sensor esta dividido en dos carpetas `data` y `logic`.
      - El fichero de texto 'ficheroABuscar.txt' es usado como fichero por defecto para realizar la búsqueda. Este fichero se encuenta en la misma carpeta `data` que `sensorFile.py`.
    - `SensoRSystem.py` en el cuál esta definida la clase 'SensorFile', implementa la clase abtracta anteriormente mencionada 'Sensor' así como el correspondiente método 'monitorizar'. Mediante esta clase se comprueban dos posibles tipos de memoria, la memoria `RAM` del sistema o la memoria `Swap`. Adicionalmente, el mètodo 'monitorizar' compruba si la memoria ocupada excede un porcentaje o no.
      - Por defecto, se monitoriza la memoria RAM y se comprueba si se excede el porcentaje del 50% de memoria.
+     
+## Actualizaciones en la segunda entrega
+- Se ha añadido al protocolo de comunicaciones las direcciones y los métodos necesarios para recibir y enviar ordenes y respuestas de añadido y eliminación de sensores.
+- Se ha actualizado la clase `RestSensor` para poder añadir y eliminar sensores de acuerdo a la actualizaciónd el protocolo de comunicación.

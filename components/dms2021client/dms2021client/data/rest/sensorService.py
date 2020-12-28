@@ -88,3 +88,30 @@ class SensorService():
             print('\033[1;31m'+'Argumentos enviados inválidos'+'\033[0m')
         else:
             print('\033[1;31m'+'Error inesperado a ocurrido'+'\033[0m')
+
+    def add_sensor(self, sensor:str, tipoSensor: str, parameters = ""):
+        form: str = urlencode({'sensor_type': tipoSensor, 'parameters': parameters})
+        headers: dict = {
+            'Content-type': 'application/x-www-form-urlencoded'
+        }
+        connection: HTTPConnection = self.__get_connection()
+        direccion = '/sensors/' + str(sensor) + '/new'
+        connection.request('POST', direccion, form, headers)
+        response: HTTPResponse = connection.getresponse()
+        if response.status == 200:
+            print('\033[1;32m'+'sensor actualizado satisfactoriamente'+'\033[0m')
+        elif response.status == 404:
+            print('\033[1;31m'+'Argumentos enviados inválidos'+'\033[0m')
+        else:
+            print('\033[1;31m'+'Error inesperado a ocurrido'+'\033[0m')
+
+    def remove_sensor(self, sensorname: str):
+        connection: HTTPConnection = self.__get_connection()
+        direccion = '/sensors/' + str(sensorname)
+        connection.request('DELETE', direccion)
+        response: HTTPResponse = connection.getresponse()
+        if response.status == 200:
+            print('\033[1;32m'+'sensor eliminado satisfactoriamente'+'\033[0m')
+        else:
+            print('\033[1;31m'+'Error inesperado a ocurrido'+'\033[0m')
+

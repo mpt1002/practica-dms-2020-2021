@@ -31,6 +31,18 @@ def set_sensor(sensorname: str):
     response: RestResponse = restSensores.set_sensor(sensorname, type_sensor, parameters)
     return  (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
 
+@app.route('/sensors/<string:sensorname>/new', methods = ['POST'])
+def add_sensor(sensorname :str):
+    type_sensor :str = request.form['sensor_type']
+    parameters : str = request.form['parameters']
+    response: RestResponse = restSensores.add_sensor(sensorname, type_sensor, parameters)
+    return  (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
+
+@app.route('/sensors/<string:sensorname>', methods = ['DELETE'])
+def remove_sensor(sensorname: str):
+    response: RestResponse = restSensores.remove_sensor(sensorname)
+    return  (response.get_content(), response.get_code(), {'Content-Type': response.get_mime_type()})
+
 @app.route('/sensors', methods = ['GET'])
 def get_all_sensors():
     response: RestResponse = restSensores.obtenerValoresTodosSensores()

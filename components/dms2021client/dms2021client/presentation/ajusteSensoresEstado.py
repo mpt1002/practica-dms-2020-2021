@@ -3,16 +3,11 @@ from dms2021client.data.rest import AuthService, SensorService
 
 class AjusteSensoresEstado():
     
-    __session_id : str
-    __username : str
-    __auth_service : AuthService
-    __sensor_service : SensorService
-
     def __init__(self, session_id : str, username : str, auth_service: AuthService, sensor_service : SensorService):
-        self.__session_id = session_id
-        self.__auth_service = auth_service
-        self.__username = username
-        self.__sensor_service = sensor_service
+        self.__session_id: str = session_id
+        self.__auth_service: AuthService = auth_service
+        self.__username:str = username
+        self.__sensor_service:SensorService = sensor_service
 
     def ejecutarPagina(self) -> int:
         '''Asegurarse de que el usuario tiene permisos de ajuste de los sensores
@@ -51,23 +46,23 @@ class AjusteSensoresEstado():
                     break
                 print('\033[0m')
             if eleccion == tipo_sensores['sensorFile']:
-                self.ajustar_sensor_de_ficheros(sensor)
+                self.__ajustar_sensor_de_ficheros(sensor)
             elif eleccion == tipo_sensores['sensorSystem']:
-                self.ajustar_sensor_de_sistema(sensor)
+                self.__ajustar_sensor_de_sistema(sensor)
             else:
                 print('\033[1;31m'+'\tOpción elegida no válida. Vuelve a intentarlo.'+'\033[0m')
                 self.__cambiar_ajustes_sensor(sensor)
         else:
             print('\033[1;31m'+'Error obteniendo los tipos de los sensores del servicio sensor'+'\033[0m')
 
-    def ajustar_sensor_de_ficheros(self, sensor: str):
+    def __ajustar_sensor_de_ficheros(self, sensor: str):
         print('\033[1;33m')
         print('\t¿Qué fichero desea monitorizar?')
         nombre_fichero = input('\t\t- Introduzca el nombre del fichero que desea buscar: ')
         self.__sensor_service.set_sensor(sensor, 'sensorFile', nombre_fichero)
         print('\033[0m')
 
-    def ajustar_sensor_de_sistema(self, sensor: str):
+    def __ajustar_sensor_de_sistema(self, sensor: str):
         print('\033[1;33m')
         while True:
             print('\t¿Qué desea monitorizar?')

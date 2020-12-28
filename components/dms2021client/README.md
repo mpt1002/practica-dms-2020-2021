@@ -36,8 +36,7 @@ Las acciones que puedes realizar en este programa son:
 - `1. Crear usuarios`: Permite añadir usuarios al servicio de autenticación. Los usuarios recien creados no tendrán ningún permiso. Para poder crear usuarios se ha de tener el permiso `AdminUsers`.
 - `2. Modificar permisos`: Se pide un usuario y se modifica el permiso introducido a ese usuario. Las posibles modificaciones pueden ser añadir o revocar los permisos. Para poder modificar permisos
 			    se ha detener el permiso `AdminRights`.
-- `3. Acceder a gestionar sensores`: Permite crear y destruir sensores del servicio sensor. Esta opción todavía no funciona (pues el profesor dijo que no era necesario), pero se planea introducirlo
-				      en la entrega 2. Si se ejecuta ahora saldrá un mensaje indicando que esta incompleto. Se ha de tener el permiso `AdminSensors`
+- `3. Acceder a gestionar sensores`: Permite crear y destruir sensores del servicio sensor. Se te dan dos opciones: añadir un sensor al servicio sensor elegido o eliminarlo. A la hora de añadir un 					      sensor, se te da a elegir el nombre del nuevo sensor y el tipo su tipo. Si al añadir sensor se introduce el nombre de un sensor que ya existe se abortara el 					      proceso. SI al eliminar un sensor, el nombre introducido no existe, se abortará el proceso. Se ha de tener el permiso `AdminSensors`.
 - `4. Modificar las reglas de gestión de cada sensor`: Permite al usuario cambiar las reglas de monitorización del sensor elegido. Los posibles cambios que se pueden realizar sobre los sensores son
 							 elegir el tipo de sensor y cambiar los parametros de monitorización de los sensores. Se han de tener los permisos de `AdminRules` para realizar
 							 estos cambios sobre el sensor.
@@ -65,3 +64,7 @@ clase `ServiciosEstado` y los `estados concretos` que heredan de este `AjusteSen
 - `ManejadorPagina` entra en pide a `ClientConfiguration` (`config/clientConfig.py`) los datos necesarios para establecer contacto con los servicios sensores y el servicio de autenticacion.
 - Los `estados concretos` hacen uso de las clases `AuthService` y `SensorService`para comunicarse con los servicios de autenticación y los servicios sensores y pedir y modificar datos de los servicios.
 - `ManejadorPagina` asigna a los `estados concretos` los servicios con los que van a interacituar.
+
+### Actualizaciones en la segunda entrega
+- Se ha terminado de implementar la tercera opción del menú (`3. Acceder a gestionar sensores`).
+- Se han añadido metodos a `SensorService` para comunicarle a los servicios sensores que se desea añadir o eliminar sensores.

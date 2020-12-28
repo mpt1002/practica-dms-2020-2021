@@ -38,8 +38,6 @@ class ManejadorPagina:
             elif opcion == 2:
                 self.__estado = ModificarPermisosEstado(self.__session_id, self.__username, self.__auth_service)
             elif opcion == 3:
-                print('FALTA CÓDIGO')
-                print('PAGINA PENDIENTE DE IMPLEMENTACIÓN, ESPERE HASTA LA ENTREGA 2')
                 self.__sensor_service = self.__get_sensor_service()
                 self.__estado = GestionarSensoresEstado(self.__session_id, self.__username, self.__auth_service, self.__sensor_service)
             elif opcion == 4:
