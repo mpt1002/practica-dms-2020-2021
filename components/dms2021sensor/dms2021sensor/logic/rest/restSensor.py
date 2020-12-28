@@ -1,6 +1,6 @@
 import json
 from dms2021core.data.rest import RestResponse
-from dms2021sensor.data import Sensor, SensorFile
+from dms2021sensor.data import Sensor, SensorFile, SensorSystem
 
 class RestSensor():
     __sensores : dict = {}
@@ -8,6 +8,7 @@ class RestSensor():
 
     def __init__(self, tipoSensores: dict):
         self.__sensores['sensor1'] = SensorFile('ficheroABuscar.txt')
+        self.__sensores['sensor2'] = SensorSystem('Mem')
         self.__tipo_sensores = tipoSensores
 
     def obtenerRespuestaSensor(self, nombreSensor:str) -> RestResponse:
@@ -50,5 +51,10 @@ class RestSensor():
         if sensorType not in self.__tipo_sensores or sensorName not in self.__sensores:
             return RestResponse('Not found', 404, 'text/plain')
         else:
-            self.__sensores[sensorName] = SensorFile(parameters)
-            return RestResponse('OK', 200, 'text/plain')
+            if sensorName == 'sensorFile':
+                self.__sensores[sensorName] = SensorFile(parameters)
+                return RestResponse('OK', 200, 'text/plain')
+            else:
+                self.__sensores[sensorName] = SensorSystem(parameters)
+                return RestResponse('OK', 200, 'text/plain')
+
