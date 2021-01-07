@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+
+from dms2021sensor.data.db import Schema
+from dms2021sensor.data.config import SensorConfiguration
+from dms2021sensor.logic.db import SensorTypeManager, SensorManager
+
+cfg: SensorConfiguration = SensorConfiguration()
+cfg.load_from_file(cfg.default_config_file())
+db: Schema = Schema(cfg)
+sensor_type_manager : SensorTypeManager = SensorTypeManager(db)
+sensor_manager: SensorManager = SensorManager(db)
+sensor_type_manager.add_sensor_type('sensorFile')
+sensor_type_manager.add_sensor_type('sensorSystem')
+sensor_manager.add_sensor('Sensor1', 'sensorFile', 'ficheroABuscar.txt')
+sensor_manager.add_sensor('Sensor2', 'sensorSystem', 'Mem')
