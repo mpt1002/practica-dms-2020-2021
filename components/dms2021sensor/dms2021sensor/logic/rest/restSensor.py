@@ -40,7 +40,7 @@ class RestSensor():
 
         i: int = 1
         for tipo in tipo_sensores:
-            dict_tipo_sensores[tipo] = i
+            dict_tipo_sensores[tipo.sensor_type] = i
             i+=1
         return dict_tipo_sensores
 
@@ -63,7 +63,6 @@ class RestSensor():
         res_sensors = {}
         for sensor in self.__sensores:
             res_sensors[sensor] = self.__sensores[sensor].monitorizar()
-        print(res_sensors)
         res_content_json = json.dumps(res_sensors)
         return RestResponse(res_content_json, 200, mime_type='application/json')
 
@@ -76,6 +75,7 @@ class RestSensor():
             return RestResponse(res_content_json, 200, 'text/plain')
 
     def get_posibles_tipos(self)->RestResponse:
+        print(self.__tipo_sensores)
         res_content_json = json.dumps(self.__tipo_sensores)
         return RestResponse(res_content_json, 200, mime_type='application/json')
 

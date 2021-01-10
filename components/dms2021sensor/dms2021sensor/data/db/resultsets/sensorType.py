@@ -29,7 +29,10 @@ class SensorType():
 
     @staticmethod
     def get_all_sensortypes(session: Session):
-        return session.query(SensorTypes).all()
+        try:
+            return session.query(SensorTypes).all()
+        except NoResultFound:
+            return {}
 
     @staticmethod
     def sensor_exists(session: Session, sensor_type) -> bool:
