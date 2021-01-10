@@ -28,6 +28,7 @@ class Sensor():
             sensor_update = Sensors(sensor_name, new_sensor_type, new_parameters)
             session.add(sensor_update)
             session.commit()
+            return sensor_update
         except NoResultFound as ex:
             raise SensorNotFoundException(
                 'A sensor with name ' + sensor_name + ' doesnt not exists.'

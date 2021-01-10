@@ -17,7 +17,7 @@ class SensorManager:
         session: Session = self.get_schema().new_session()
         Sensor.create(session, sensor_name, sensor_type, parameters)
 
-    def update_sensor(self, session: Session, sensor_name: str, new_sensor_type: str, new_parameters: str):
+    def update_sensor(self, sensor_name: str, new_sensor_type: str, new_parameters: str):
         session: Session = self.get_schema().new_session()
         Sensor.update_sensor(session, sensor_name, new_sensor_type, new_parameters)
 

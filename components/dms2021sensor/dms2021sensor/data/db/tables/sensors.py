@@ -1,5 +1,4 @@
-
-from sqlalchemy import Table, MetaData, Column, ForeignKey, String
+from sqlalchemy import Table, MetaData, Column, ForeignKey, String # type: ignore
 from dms2021sensor.data.db.tables.db_table import DBTable
 
 class Sensors(DBTable):

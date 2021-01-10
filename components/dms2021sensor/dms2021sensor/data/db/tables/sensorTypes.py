@@ -1,5 +1,5 @@
-from sqlalchemy import Table, MetaData, Column, String
 from dms2021sensor.data.db.tables.db_table import DBTable
+from sqlalchemy import Table, MetaData, Column, String # type: ignore
 
 class SensorTypes(DBTable):
 
