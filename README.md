@@ -111,3 +111,108 @@ The directory `scripts` contain several helper scripts.
   ```bash
   scripts/verify-commit.sh
   ```
+# Uso de la aplicación
+
+Trás haber seguido las instrucciones de instalación descritas en los puntos anteriores, nos encontramos con la primera "página", la de Login.
+
+## Login
+
+Opción en la cual se debe introducir el nombre del usuario así como su correspondiente contraseña para poder acceder a la aplicación.
+    - Usuarios disponibles:
+        - Username: *admin* (tiene todos los posibles permisos)
+          - Password: *admin*
+        - Username: *cliente*
+          - Password: *cliente*
+  
+  ![Alt text](pics_app/Login.png "Login")
+
+- **Menú principal**: página que sigue al **Login** donde se nos muestra todas las posibles opciones que cuenta la aplicación, tal y como se demuestra en la siguiente ilustración.
+
+  ![Alt text](pics_app/MenuPrincipal.png "Menú Principal")
+
+  En este **Menú principal** tenemos las siguientes opciones:
+
+  **1. Crear usuarios**: creación de nuevos usuarios, siempre y cuando se tengan los permisos necesios para ello.
+    - Si se disponen de los permisos necesarios aparecera una nueva "página" con un formulario a completar.
+      - El username y el password del nuevo usuario.
+  
+      ![Alt text](pics_app/crearUsers.png "Formulario para la creación de un nuevo usuario")
+      - Si la operación se ha relizado correctamente, aparece:
+        ![Alt text](pics_app/crearUsersOK.png "Usuario creado correctamente")
+      - En caso contrario (el usuario que se intenta crear ya existe), aparece:
+        ![Alt text](pics_app/crearUsersFAIL.png "Error en la creación de un nuevo usuario")
+
+  **2. Modificar Permisos**: esta opción tiene la funcionalidad de modificar los permisos de usuario existementes en la aplicación, siempre y cuando se tengan los permisos necesarios para ello.
+    - Si se disponen de dichos permisos aparecerá una nueva "página" con un formulario a completar.
+      - Donde se introducen:
+        - El username del usuario al cuál se quieren modificar sus permisos.
+          ![Alt text](pics_app/Op2_username.png)
+        - Introducir la acción a realizar 1 ó 2, para añadir o revocar permisos respectivamente.
+      
+          ![Alt text](pics_app/Op2_acc_1.png)
+          - Y por último, el permiso que se desea añadir o revocar.
+            ![Alt text](pics_app/Op2_acc1_OK.png "Añadir permiso correctamente")
+            ![Alt text](pics_app/Op2_acc2_OK.png "Revocar permiso correctamente")
+            - Si el usuario especificado ya tiene un permiso asignado, no se le puede volver a asignar.
+            ![Alt text](pics_app/Op2_acc1_FAIL.png "Añadir permiso que ya tiene un usario")
+            - Si el usuario especificado no tiene un permiso, este no se le puede revocar.
+            ![Alt text](pics_app/Op2_acc2_FAIL.png "Revocar un permiso que no tiene un usuario")
+
+  **3. Acceder a gestionar sensores**: opción que te permite agregar o eliminar sensores, siempre y cuando se tengan los permisos necesarios.
+    - Indicar la acción a realizar 1 ó 2 (añadir ó eliminar sensor).
+      - Introducir el nombre del sensor a añadir.
+        - Elegir el tipo de sensor a añadir.
+          - SensorFile (1):
+            - Introducir el nombre del fichero a encontrar.
+              ![Alt text](pics_app/Op3_acc1_OK.png "Creación de un nuevo sensorFile")
+          - SensorSystem (2).
+            - Elegir entre Men ó Swap:
+              ![Alt text](pics_app/Op3_acc1_sys_OK.png "Creación de un nuevo sensorSystem")
+      - Introducir el nombre del sensor a eliminar.
+        ![Alt text](pics_app/Op3_acc2_OK.png "Eliminación de sensor correctamente")
+
+  **4. Modificar las reglas de monitorización de cada sensor**: opción que permite cambiar las reglas de monitorización de cada uno de los sensores, sí y sólo si se tienen los correspondientes permisos.
+    - Seleccionar el sensor al cual se quieren cambiar los ajustes.
+      - Seleccionar el nuevo tipo de sensor que se desea.
+        - SensorFile (1):
+          - Introducir el NOMBRE del fichero que se desea buscar.
+
+            ![Alt text](pics_app/Op4_s1_OK.png "Modificar las reglas para sensorFile, búsqueda de un nuevo fichero")
+        - SensorSystem (2):
+          - Introducir qué es lo que se desea monitorizar (Men (defecto) ó Swap):
+          ![Alt text](pics_app/Op4_s2_OK.png "Modificar las reglas para sensorSystem, monitorización de la swap")
+
+  **5. Obtener los valores de monitorización de cada sensor**: opción que permite obtener los diferentes valores que tienen los sensores de la aplicación, sólo si se tienen los permisos necesarios.
+    - **Valores de monitorización por defecto**:
+      - Búsqueda del fichero "ficheroABuscar.txt".
+      - Monitorización de la memoria RAM del sistema.
+      
+      Ejemplo: 
+      ![Alt text](pics_app/Op5_defecto_OK.png "Valores que se obtienen por defecto")
+    - **Si se han modificado anteriormente las reglas de los sensores, apareceran la monitorización correspondiente a esas reglas definidas**. 
+    
+      Ejemplo:
+      ![Alt text](pics_app/Op5_cambiado_OK.png "Nuevos valores de monitorización con las nuevas reglas")
+
+  **6. Salir**: opción que permite el Logout de la aplicación.
+
+    ![Alt text](pics_app/Op6_OK.png "Logout")
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
