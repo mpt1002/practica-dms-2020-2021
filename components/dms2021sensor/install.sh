@@ -9,3 +9,6 @@ pushd "${TEMP_DIR}"
 popd
 
 rm -R "${TEMP_DIR}"
+
+#Initialize data base
+dms2021sensor_initialize
