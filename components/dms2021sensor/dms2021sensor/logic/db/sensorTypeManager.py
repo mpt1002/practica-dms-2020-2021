@@ -21,6 +21,10 @@ class SensorTypeManager:
         session: Session = self.get_schema().new_session()
         SensorType.delete(session, sensor_type)
 
+    def get_all_sensortypes(self):
+        session: Session = self.get_schema().new_session()
+        return SensorType.get_all_sensortypes(session)
+
     def get_schema(self) -> Schema:
         """ Gets the schema being used by this instance.
         ---

@@ -21,6 +21,10 @@ class SensorManager:
         session: Session = self.get_schema().new_session()
         Sensor.update_sensor(session, sensor_name, new_sensor_type, new_parameters)
 
+    def get_all_sensor(self):
+        session: Session = self.get_schema().new_session()
+        return Sensor.get_all_sensor(session)
+
     def get_schema(self) -> Schema:
         """ Gets the schema being used by this instance.
         ---

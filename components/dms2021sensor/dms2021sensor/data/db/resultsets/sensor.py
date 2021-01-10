@@ -34,6 +34,13 @@ class Sensor():
                 'A sensor with name ' + sensor_name + ' doesnt not exists.'
                 ) from ex
 
+    @staticmethod
+    def get_all_sensor(session: Session)-> Sensors:
+        try:
+            sensor = session.query(Sensors).all()
+            return sensor
+        except NoResultFound:
+            return None
 
     @staticmethod
     def sensor_exists(session: Session, sensor_name: str, sensor_type: str) -> bool:

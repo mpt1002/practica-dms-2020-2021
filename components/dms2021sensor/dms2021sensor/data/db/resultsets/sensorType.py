@@ -28,6 +28,10 @@ class SensorType():
             """Sensor type does not exists. No need to nothing"""
 
     @staticmethod
+    def get_all_sensortypes(session: Session):
+        return session.query(SensorTypes).all()
+
+    @staticmethod
     def sensor_exists(session: Session, sensor_type) -> bool:
         try:
             query = session.query(SensorTypes).filter_by(sensor_type=sensor_type)

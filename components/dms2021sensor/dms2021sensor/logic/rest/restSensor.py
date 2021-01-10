@@ -1,15 +1,48 @@
 import json
 from dms2021core.data.rest import RestResponse
 from dms2021sensor.data import Sensor, SensorFile, SensorSystem
+from dms2021sensor.data.db.tables import Sensors
+from dms2021sensor.logic.db import SensorManager, SensorTypeManager
+from dms2021sensor.data.db import Schema
+from dms2021sensor.data.config import SensorConfiguration
 
 class RestSensor():
-    __sensores : dict = {}
-    __tipo_sensores:dict = {}
 
-    def __init__(self, tipoSensores: dict):
-        self.__sensores['sensor1'] = SensorFile('ficheroABuscar.txt')
-        self.__sensores['sensor2'] = SensorSystem('Mem')
-        self.__tipo_sensores = tipoSensores
+    def __init__(self):
+        cfg: SensorConfiguration = SensorConfiguration()
+        cfg.load_from_file(cfg.default_config_file())
+        self.__schema = Schema(cfg)
+        self.__sensor_manager = SensorManager(self.__schema)
+        self.__sensores: dict = self.__obtener_sensores()
+        self.__sensor_type_manager = SensorTypeManager(self.__schema)
+        self.__tipo_sensores: dict = self.__obtener_tipo_sensores()
+
+    def __obtener_sensores(self) -> dict:
+        '''Debido a que en el resto de servicios se trabaja con diccionarios para los sensores
+         se van a convertir ahora a diccionario'''
+
+        sensores = self.__sensor_manager.get_all_sensor()
+        dict_sensores: dict = {}
+
+        for sensor in sensores:
+            if sensor.sensor_type == 'sensorFile':
+                dict_sensores[sensor.sensor_name] = SensorFile(sensor.parameters)
+            elif sensor.sensor_type == 'sensorSystem':
+                dict_sensores[sensor.sensor_name] = SensorSystem(sensor.parameters)
+        return dict_sensores
+
+    def __obtener_tipo_sensores(self)-> dict:
+        '''Debido a que en el resto de servicios se trabaja con diccionarios para los tipos
+        de sensores se van a convertir ahora a diccionario'''
+        
+        tipo_sensores = self.__sensor_type_manager.get_all_sensortypes()
+        dict_tipo_sensores: dict = {}
+
+        i: int = 1
+        for tipo in tipo_sensores:
+            dict_tipo_sensores[tipo] = i
+            i+=1
+        return dict_tipo_sensores
 
     def obtenerRespuestaSensor(self, nombreSensor:str) -> RestResponse:
         keys = self.__sensores.keys()

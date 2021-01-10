@@ -13,7 +13,7 @@ root_logger.addHandler(default_handler)
 
 cfg: SensorConfiguration = SensorConfiguration()
 cfg.load_from_file(cfg.default_config_file())
-restSensores = RestSensor({'sensorFile': 1, 'sensorSystem': 2})
+restSensores = RestSensor()
 
 @app.route('/', methods=['GET'])
 def is_running():
