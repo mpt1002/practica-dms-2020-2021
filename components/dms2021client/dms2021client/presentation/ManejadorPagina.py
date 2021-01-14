@@ -5,7 +5,7 @@ from getpass import getpass
 from dms2021client.data.config import ClientConfiguration
 from dms2021client.data.rest import AuthService, SensorService
 from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
-from ..presentation import ServiciosEstado, MenuEstado, ExitEstado, CrearUsuariosEstado, ModificarPermisosEstado, GestionarSensoresEstado, AjusteSensoresEstado, MonitorizarSensoresEstado
+from dms2021client.presentation import ServiciosEstado, MenuEstado, ExitEstado, CrearUsuariosEstado, ModificarPermisosEstado, GestionarSensoresEstado, AjusteSensoresEstado, MonitorizarSensoresEstado
 
 class ManejadorPagina:
 
