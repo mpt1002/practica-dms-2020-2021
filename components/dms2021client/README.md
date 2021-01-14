@@ -49,14 +49,17 @@ Ver imagen Clases1.3.png
 
 ### Descripción de la arquitectura
 dms2021client esta dividido en tres carpetas: `data`, `logic` y `presentation`. Estas tres carpetas siguen un planteamiento MVC (modelo, vista, controlador).
-En la carpeta `data` hay dos subcarpetas: la carpeta `config`, que se utiliza para obtener los datos necesarios para establecer contacto con los servicios sensores y el servicio de autenticación. La
-otra carpeta es la carptea `rest`, que contiene las clases necesarias para comunicarse con los servicios de autenticacion (con `authservice.py`) y los servicios sensores (con `sensorService.py`).
+
+En la carpeta `data` hay dos subcarpetas: la carpeta `config`, que se utiliza para obtener los datos necesarios para establecer contacto con los servicios sensores y el servicio de autenticación. La otra carpeta es la carptea `rest`, que contiene las clases necesarias para comunicarse con los servicios de autenticacion (con `authservice.py`) y los servicios sensores (con `sensorService.py`).
+
 En la carpeta `logic` se encuentra la clase `ManejadorPagina.py` que se encarga de manejar el viaje entre páginas de la aplicación. Al iniciar el servicio cliente se llama a esta clase, que asume el
 rol de guiar al usuario entre páginas.
+
 En la carpeta `presentation` se encuentran las páginas entre las que se viaja y la clase de la que todas estas heredan (`serviciosEstado.py`). El viaje entre páginas implementa el patron `estado`. El 
 `contexto` del patrón es la clase `ManejadorPagina`, que se encargará de viajar entre páginas. Los `estados` serán las posibles páginas entre las que se puede navegar, siendo el `estado abstracto` la
 clase `ServiciosEstado` y los `estados concretos` que heredan de este `AjusteSensoresEstado`, `CrearUsuariosEstado`, `ExitEstado`, `GestionarSensoresEstado`, `MenuEstado`, `ModificarPermisosEstado` y 
 `MonitorizarSensoresEstado`.
+
 Se ha elegido el patrón estado para las páginas entre las que navega el usuario porque estas páginas van a cambiar en tiempo de ejecución, además de que el comportamiento de las páginas varía en función de la página en la que te encuentres. Si todas las paginas las ubiesemos tratado como, por ejemplo, metodos en la clase `ManejadorPagina`, estaríamos creando una super clase (sintoma de Bad Smell) complicando mucho más la lectura del código.
 
 ### Relaciones entre clases

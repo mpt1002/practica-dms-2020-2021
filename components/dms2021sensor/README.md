@@ -122,7 +122,7 @@ dms2021sensor esta dividido en dos carpetas `data` y `logic`.
 - Se ha añadido al protocolo de comunicaciones las direcciones y los métodos necesarios para recibir y enviar ordenes y respuestas de añadido y eliminación de sensores.
 - Se ha actualizado la clase `RestSensor` para poder añadir y eliminar sensores de acuerdo a la actualizaciónd el protocolo de comunicación.
 
-### Base de datos de lo sensores
+### Base de datos de los sensores
 Hay dos tablas utilizadas para mantener la persistencia de los sensores:
 - `TipoSensores`: Esta tabla tiene solo un campo, que es el nombre del tipo de sensor.
 - `Sensores`: Esta tabla tiene toda la información relevante sobre los sensores. Cada sensor es una tupla y tiene 3 campos: el nombre del sensor, el tipo del sensor y los parametros del sensor.
