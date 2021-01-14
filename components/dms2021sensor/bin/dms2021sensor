@@ -5,7 +5,7 @@ from flask import Flask, request
 from flask.logging import default_handler
 from dms2021sensor.data.config import SensorConfiguration
 from dms2021core.data.rest import RestResponse
-from dms2021sensor.logic.rest.restSensor import RestSensor
+from dms2021sensor.presentation.restSensor import RestSensor
 
 app = Flask(__name__)
 root_logger = logging.getLogger()
