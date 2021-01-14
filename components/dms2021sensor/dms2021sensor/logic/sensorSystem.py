@@ -1,4 +1,4 @@
-from .Sensor import Sensor
+from dms2021sensor.data.Sensor import Sensor
 import os
 
 class SensorSystem(Sensor):

@@ -1,6 +1,8 @@
 import json
 from dms2021core.data.rest import RestResponse
-from dms2021sensor.data import Sensor, SensorFile, SensorSystem
+from dms2021sensor.data import Sensor
+from dms2021sensor.logic.sensorFile import SensorFile
+from dms2021sensor.logic.sensorSystem import SensorSystem
 from dms2021sensor.data.db.tables import Sensors
 from dms2021sensor.logic.db import SensorManager, SensorTypeManager
 from dms2021sensor.data.db import Schema
