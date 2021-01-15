@@ -57,13 +57,12 @@ rol de guiar al usuario entre páginas.
 
 En la carpeta `presentation` se encuentran las páginas entre las que se viaja y la clase de la que todas estas heredan (`serviciosEstado.py`). El viaje entre páginas implementa el patron `estado`. El 
 `contexto` del patrón es la clase `ManejadorPagina`, que se encargará de viajar entre páginas. Los `estados` serán las posibles páginas entre las que se puede navegar, siendo el `estado abstracto` la
-clase `ServiciosEstado` y los `estados concretos` que heredan de este `AjusteSensoresEstado`, `CrearUsuariosEstado`, `ExitEstado`, `GestionarSensoresEstado`, `MenuEstado`, `ModificarPermisosEstado` y 
-`MonitorizarSensoresEstado`.
+clase `ServiciosEstado` y los `estados concretos` que heredan de este `AjusteSensoresEstado`, `CrearUsuariosEstado`, `ExitEstado`, `GestionarSensoresEstado`, `LoginEstado`, `MenuEstado`, `ModificarPermisosEstado` y `MonitorizarSensoresEstado`.
 
 Se ha elegido el patrón estado para las páginas entre las que navega el usuario porque estas páginas van a cambiar en tiempo de ejecución, además de que el comportamiento de las páginas varía en función de la página en la que te encuentres. Si todas las paginas las ubiesemos tratado como, por ejemplo, metodos en la clase `ManejadorPagina`, estaríamos creando una super clase (sintoma de Bad Smell) complicando mucho más la lectura del código.
 
 ### Relaciones entre clases
-- `AjusteSensoresEstado`, `CrearUsuariosEstado`, `ExitEstado`, `GestionarSensoresEstado`, `MenuEstado`, `ModificarPermisosEstado` y `MonitorizarSensoresEstado` heredan de `ServiciosEstado`.
+- `AjusteSensoresEstado`, `CrearUsuariosEstado`, `ExitEstado`, `GestionarSensoresEstado`, `LoginEstado`, `MenuEstado`, `ModificarPermisosEstado` y `MonitorizarSensoresEstado` heredan de `ServiciosEstado`.
 - `ManejadorPagina` se encarga de la transición entre los distintos `estados concretos`.
 - `ManejadorPagina` entra en pide a `ClientConfiguration` (`config/clientConfig.py`) los datos necesarios para establecer contacto con los servicios sensores y el servicio de autenticacion.
 - Los `estados concretos` hacen uso de las clases `AuthService` y `SensorService`para comunicarse con los servicios de autenticación y los servicios sensores y pedir y modificar datos de los servicios.
