@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 
-import time
-from getpass import getpass
 from dms2021client.data.config import ClientConfiguration
 from dms2021client.data.rest import AuthService, SensorService
-from dms2021client.data.rest.exc import InvalidCredentialsError, UnauthorizedError
 from dms2021client.presentation import ServiciosEstado, MenuEstado, ExitEstado, CrearUsuariosEstado, ModificarPermisosEstado, GestionarSensoresEstado, AjusteSensoresEstado, MonitorizarSensoresEstado
+from .loginEstado import LoginEstado
 
 class ManejadorPagina:
 
@@ -22,15 +20,12 @@ class ManejadorPagina:
         self.__cfg = ClientConfiguration()
         self.__cfg.load_from_file(self.__cfg.default_config_file())
         self.__auth_service = AuthService(self.__cfg.get_auth_service_host(), self.__cfg.get_auth_service_port())
-        self.__session_id, self.__username = self.login()
-        print('Contacto establecido')
+        self.__estado = LoginEstado(self.__auth_service)
+        opcion: int = self.__estado.ejecutarPagina()
+        self.__session_id = self.__estado.get_session_id()
+        self.__username = self.__estado.get_username()
         
-        # Ir al estado inicial
-        self.__estado = MenuEstado(self.__session_id)
-        
-        opcion = 0
         while True:
-            opcion = self.__estado.ejecutarPagina()
             if opcion == 0:
                 self.__estado = MenuEstado(self.__session_id)
             elif opcion == 1:
@@ -51,6 +46,7 @@ class ManejadorPagina:
             elif opcion == 7:
                 #La opcion 7 solo saltara si se ha hecho el correcto logout
                 break
+            opcion = self.__estado.ejecutarPagina()
                                 
     # Obtener el estado actual
     def get_Estado(self) -> ServiciosEstado:
@@ -80,31 +76,6 @@ class ManejadorPagina:
     # Obtener la autentificacion del servicio actual
     def get_auth_service(self) -> AuthService:
         return self.__auth_service
-
-    def login(self):
-        print('Estableciendo contacto con el servidor, por favor espere...')
-        while not self.__auth_service.is_running():
-            time.sleep(1)
-
-        print('\033[1;33m'+'LOGIN')
-        username: str = input('\t- Username: ')
-        password: str = getpass('\t- Password: ')
-        print('\033[0m')
-        try:
-            self.__session_id = self.__auth_service.login(username, password)
-            self.__username = username
-            print('\033[1;32m')
-            print('\tLogged in successfully as ' + username + ' . Session id: ' + self.__session_id)
-            print('\033[0m')
-        except InvalidCredentialsError:
-            print('\033[1;31m')
-            print('\tWrong username and/or password. Try again.')
-            print('\033[0m')
-            self.__session_id, self.__username = self.login()
-        except Exception as ex:
-            print(ex)
-
-        return self.__session_id, self.__username
 
     def __get_sensor_service(self) -> SensorService:
         opcion:int = 0

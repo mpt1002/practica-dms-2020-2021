@@ -1,7 +1,7 @@
 from .serviciosEstado import ServiciosEstado
 from dms2021client.data.rest import AuthService, SensorService
 
-class AjusteSensoresEstado():
+class AjusteSensoresEstado(ServiciosEstado):
     
     def __init__(self, session_id : str, username : str, auth_service: AuthService, sensor_service : SensorService):
         self.__session_id: str = session_id

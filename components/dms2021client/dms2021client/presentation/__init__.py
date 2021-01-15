@@ -7,3 +7,4 @@ from .gestionarSensoresEstado import GestionarSensoresEstado
 from .ajusteSensoresEstado import AjusteSensoresEstado
 from .monitorizarSensoresEstado import MonitorizarSensoresEstado
 from .ManejadorPagina import ManejadorPagina
+from .loginEstado import LoginEstado
