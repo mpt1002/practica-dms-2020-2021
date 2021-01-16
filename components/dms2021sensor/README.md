@@ -31,7 +31,7 @@ The configuration file is a YAML dictionary with the following configurable para
 
 As only sensor1 is implemented, it can only be executed throught the command `dms2021sensor1` as any other program.
 
-## REST API specification for sensor1
+## REST API specification for sensor
 
 This service exposes a REST API so other services/applications can interact with it.
 
@@ -40,8 +40,10 @@ This service exposes a REST API so other services/applications can interact with
   Status verification.
   - Returns:
     - `200 OK` if the service is running.
-    - Example 
+  - Example for sensor1
      ![Alt text](pics_sensor1/status.png)
+  - Example for sensor2
+  - ![Alt text](pics_sensor2/status.png)
     
 - `/sensors/<str: sensorname>/value` [`GET`]
   Gets the value monitorized by the specified sensor
@@ -50,28 +52,38 @@ This service exposes a REST API so other services/applications can interact with
   - Returns:
     - `200 sensorvalue` if the value of the sensor was sent succesfuly
     - `404 Not foud` if the sensor doesn't existe
-  - Example
+  - Example for sensor1
     ![Alt text](pics_sensor1/getValue.png)    
+  - Example for sensor2
+    ![Alr text](pics_sensor2/getValue.png)
+
 - `/sensors/<str: sensorname>` [`POST`]: 
-  Put a new file to search by a specific sensor
+  Put a new file to search by a specific sensor, if it's sensor1, or put the memory type (Mem or Swap) for sensor2
   - Parameters: 
     - `sensorname` [path] (`str`): The sensor name
     - `sensor_type` [from data] (`str`): new type of the sensor
-    - `parameters` [from data] (`str''): aditional parameters for the new sensor type
+    - `parameters` [from data] (`str`): aditional parameters for the new sensor type
+      - For sensor1, the name of the file to search.
+      - For sensor2, Mem or Swap.
   - Returns:
     - `200 OK` if the sensor was succesfully updated
     - `404 Not found` if the recieved parameters are invalid
-  - Example
+  - Example for sensor1
     ![Alt text](pics_sensor1/newValueForSensor1.png)
+  - Example for sensor2
+    ![Alt text](pics_sensor2/newValueForSensor2.png)
+
     
 - `/sensors/<str: sensorname>/new` [`POST`]
   Add a new sensor
   - Parameters: 
     - `sensorname` [path] (`str`): The new sensor name
-    - `sensor_type` [from data] (`str`): type of the sensor (sensorFile)
+    - `sensor_type` [from data] (`str`): type of the sensor (sensorFile or sensorSystem)
     - `parameters` [from data] (`str''): aditional parameters for the new sensor (file to search).
-  - Example
+  - Example for sensor1
     ![Alt text](pics_sensor1/newSensor1.png)
+  - Example for sensor2
+    ![Alt text](pics_sensor2/newSensor2.png)
     
 - `/sensors/<str: sensorname>` [`DELETE`]
   Remove the sensor with a specific name, if it exists.
@@ -79,31 +91,41 @@ This service exposes a REST API so other services/applications can interact with
     - `sensorname` [path] (`str`): The sensor name
   - Returns:
     - `200 OK` if the sensor was succesfully removed
-  - Example
+  - Example for sensor1
     ![Alt text](pics_sensor1/removeSensor1.png)
+  - Example for sensor2
+    ![Alt text](pics_sensor2/removeSensor2.png)
+  - **Note: obviously when we want to check the value of a sensor that doesn't exist we get 404 error.**
 
 - `/sensors` [`GET`]: 
   Gets all the names-values of the monitorized sensors
   - Returns:
     - `200 sensorsname` if the name of every sensor was sent succesfuly
     - `404 No sensors` if the service has no sensors
-  - Example
+  - Example for sensor1
     ![Alt text](pics_sensor1/allSensor1.png)
-    
+  - Example dor sensor2
+    ![Alt text](pics_sensor2/allSensorsValues.png)
+
 - `/sensors/types` [`GET`]: 
   Gets all the posible types of monitorized sensors
   - Returns:
     - `200 sensortypes` if the possible types of sensors was sent succesfuly
-  - Example
+  - Example for sensor1
     ![Alt text](pics_sensor1/sensorTypes.png)
+  - Example for sensor2
+    ![Alt text](pics_sensor2/sensorTypes.png)
 
 - `/sensors/values` [`GET`]
   Gets all the values monitorized by all sensors
   - Returns:
     - `200 values of sensors` if the values of every sensor was sent succesfuly
     - `404 Not found`if the sensor service has no sensors
-  - Example
+  - Example for sensor1
     ![Alt text](pics_sensor1/allValuesSensors.png)
+  - Example for sensor2
+    ![Alt text](pics_sensor2/allSensor2.png)
+
 # Arquitectura
 
 ## Diagrama UML
