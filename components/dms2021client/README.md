@@ -44,8 +44,8 @@ Las acciones que puedes realizar en este programa son:
 - `6. Salir`: Cierra la sesion del usuario y termina el programa.
 
 ## Arquitectura
-### Diagrama UML
-Ver imagen Clases1.3.png
+### Diagrama UML (Primera entrega)
+![Alt text](Clases1.3.png)
 
 ### Descripción de la arquitectura
 dms2021client esta dividido en tres carpetas: `data`, `logic` y `presentation`. Estas tres carpetas siguen un planteamiento MVC (modelo, vista, controlador).
