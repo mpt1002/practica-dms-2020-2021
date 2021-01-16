@@ -128,8 +128,10 @@ This service exposes a REST API so other services/applications can interact with
 
 # Arquitectura
 
-## Diagrama UML
-Consultar imagen Sensores.png
+## Diagrama UML (Primera entrega)
+![Alt text](Sensores.png)
+
+## Diagrama UML (Segunda entrega)
 
 ## Descripción de la arquitectua
 
