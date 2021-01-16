@@ -40,17 +40,20 @@ This service exposes a REST API so other services/applications can interact with
   Status verification.
   - Returns:
     - `200 OK` if the service is running.
+    - Example 
+     ![Alt text](pics_sensor1/status.png)
     
 - `/sensors/<str: sensorname>/value` [`GET`]
   Gets the value monitorized by the specified sensor
   - Parameters: 
     - `sensorname` [path] (`str`): The sensor name
-  -Returns:
+  - Returns:
     - `200 sensorvalue` if the value of the sensor was sent succesfuly
     - `404 Not foud` if the sensor doesn't existe
-    
-- `/sensors/<str: sensorname>` [`POST`]
-  Gets the value monitorized by the specified sensor
+  - Example
+    ![Alt text](pics_sensor1/getValue.png)    
+- `/sensors/<str: sensorname>` [`POST`]: 
+  Put a new file to search by a specific sensor
   - Parameters: 
     - `sensorname` [path] (`str`): The sensor name
     - `sensor_type` [from data] (`str`): new type of the sensor
@@ -58,42 +61,49 @@ This service exposes a REST API so other services/applications can interact with
   - Returns:
     - `200 OK` if the sensor was succesfully updated
     - `404 Not found` if the recieved parameters are invalid
+  - Example
+    ![Alt text](pics_sensor1/newValueForSensor1.png)
     
 - `/sensors/<str: sensorname>/new` [`POST`]
-  Gets the value monitorized by the specified sensor
+  Add a new sensor
   - Parameters: 
-    - `sensorname` [path] (`str`): The sensor name
-    - `sensor_type` [from data] (`str`): type of the sensor
-    - `parameters` [from data] (`str''): aditional parameters for the new sensor type
-  - Returns:
-    - `200 OK` if the sensor was succesfully updated
-    - `404 Not found` if the recieved parameters are invalid
+    - `sensorname` [path] (`str`): The new sensor name
+    - `sensor_type` [from data] (`str`): type of the sensor (sensorFile)
+    - `parameters` [from data] (`str''): aditional parameters for the new sensor (file to search).
+  - Example
+    ![Alt text](pics_sensor1/newSensor1.png)
     
 - `/sensors/<str: sensorname>` [`DELETE`]
-  Remove de sensor of the specified name
+  Remove the sensor with a specific name, if it exists.
   - Parameters:
-    -`sensorname` [path] (`str`): The sensor name
+    - `sensorname` [path] (`str`): The sensor name
   - Returns:
-    -`200 OK` if the sensor was succesfully removed
-    
-- `/sensors` [`GET`]
-  Gets all the names of the monitorized sensors
+    - `200 OK` if the sensor was succesfully removed
+  - Example
+    ![Alt text](pics_sensor1/removeSensor1.png)
+
+- `/sensors` [`GET`]: 
+  Gets all the names-values of the monitorized sensors
   - Returns:
     - `200 sensorsname` if the name of every sensor was sent succesfuly
     - `404 No sensors` if the service has no sensors
+  - Example
+    ![Alt text](pics_sensor1/allSensor1.png)
     
-- `/sensors/types` [`GET`]
+- `/sensors/types` [`GET`]: 
   Gets all the posible types of monitorized sensors
-  -Returns:
+  - Returns:
     - `200 sensortypes` if the possible types of sensors was sent succesfuly
-    
--`/sensors/values` [`GET`]
+  - Example
+    ![Alt text](pics_sensor1/sensorTypes.png)
+
+- `/sensors/values` [`GET`]
   Gets all the values monitorized by all sensors
-  -Returns:
+  - Returns:
     - `200 values of sensors` if the values of every sensor was sent succesfuly
-    -`404 Not found`if the sensor service has no sensors
-
-
+    - `404 Not found`if the sensor service has no sensors
+  - Example
+    ![Alt text](pics_sensor1/allValuesSensors.png)
 # Arquitectura
 
 ## Diagrama UML
