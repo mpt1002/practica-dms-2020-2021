@@ -132,6 +132,10 @@ This service exposes a REST API so other services/applications can interact with
 ![Alt text](Sensores.png)
 
 ## Diagrama UML (Segunda entrega)
+![Alt text](DiagramaSensores_SegundaEntrega.png)
+
+## Esquema de la Base de Datos
+![Alt text](BaseDatos2.1.PNG)
 
 ## Descripción de la arquitectua
 

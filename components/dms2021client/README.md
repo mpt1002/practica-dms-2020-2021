@@ -48,6 +48,7 @@ Las acciones que puedes realizar en este programa son:
 ![Alt text](Clases1.3.png)
 
 ### Diagrama UML (Segunda entrega)
+![Alt text](DiagramaClase_SegundaEntrega.png)
 ### Descripción de la arquitectura
 dms2021client esta dividido en tres carpetas: `data`, `logic` y `presentation`. Estas tres carpetas siguen un planteamiento MVC (modelo, vista, controlador).
 
